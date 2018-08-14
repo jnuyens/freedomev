@@ -1,8 +1,8 @@
 # freedomev
-FreedomEV repository. Unlocking the full potential of Linux on your EV!
+FreedomEV repository. Unlocking the full potential of Linux on your Electric Vehicle!
 
 ### Disclaimer
-This is not made by Tesla, nor officially endorsed (just yet?). We take no responsability whatsoever for damage, costs, injury or even death caused by this to you or third parties. In certain territories, it might violate local regulations, we don't know about that, and we don't care. We hope FreedomEV will enjoy your car even more.
+This is not made by Tesla Inc., nor officially endorsed (just yet?). We take no responsability whatsoever for damage, costs, injury or even death caused by this to you or third parties. In certain territories, it might violate local regulations, we don't know about that, and we don't care. We hope FreedomEV will enjoy your car even more.
 I am open to my Tesla Service Center about what we are doing here. But when I let my car being services, I disable all strange stuff so they might not become too confused (unless they ask for it). Tesla car service people have instructions to remove all visible USB attached stuff to not interfere with possible updates, keep that in mind. Also, I don't claim warranty on stuff I broke myself, Tesla was very reasonable with respect to that. 
 We hope Tesla will provide - in a not too distant future - a legitimate way for owners to get root on your own car. For example by allowing owners to request a secret ssh token through their web account or car app. But nothing is certain until Elon Musk tweets about it ;)
 We also hope other electric car manufacturers will be inspired, and allow the community to grow beyond what we currently imagine.
