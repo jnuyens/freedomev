@@ -30,6 +30,12 @@ Go into the chrooted environment:
 ```
 bash /disk/*/freedomev/chroot
 ```
+Update to the latest version of FreedomEV:
+```
+rm /freedomev
+git clone http://www.github.com/jnuyens/freedomev
+```
+
 And test it out! (see below)
 
 ## Installation instructions - manual installation
