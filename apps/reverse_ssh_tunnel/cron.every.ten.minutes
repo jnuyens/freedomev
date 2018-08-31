@@ -1,0 +1,68 @@
+#!/bin/bash
+#Copyright Jasper Nuyens <jasper@linux.com>, 2018
+#Licensed under GPLv3 License as found on http://www.gnu.org
+#freedomev bootstrap sources variables remote_port and ssh_account from ${appdir}/userdata/config
+#they should be in that file like:
+# export remote_port=1123
+# export ssh_account=your-ssh-account@yourserver.com
+#
+#it will allow you to connect to your car from your own server with: ssh tesla1@localhost -p 1123
+#provided you can connect from the car to your server over ssh with an ssh key
+#so generate a key first with: ssh-keygen -t rsa -b 2048 -G /disk/USB.XXX/freedomev/apps/reverse_ssh_tunnel/userdata/id_rsa
+#without password, and put the content of /disk/USB.XXX/freedomev/apps/reverse_ssh_tunnel/userdata/id_rsa.pub onto your
+#ssh server in the ~/.ssh/authorized_keys file.
+#
+#test run this with:
+# source /disk/USB.XXX/freedomev/apps/reverse_ssh_tunnel/
+# /disk/USB.XXX/freedomev/apps/reverse_ssh_tunnel/cron.every.ten.minutes
+#
+# If that runs without errors, you will be able to connect to your car over the tunnel, by first connecting to your ssh server and then
+# running: ssh tesla1@localhost -p 1123
+# Provide the token as password, and you can sudo to become root afterwards.
+
+if [[ ${ssh_account} == "" ]]
+then
+ echo Please fill in the ssh_account variable in the ssh_reverse_tunnel app config file located in:
+ echo ${appdir}/userdata/config
+ exit 200
+ #this file ${appdir}/userdata/config should always be sourced prior to starting this.
+fi
+
+if [[ ! -f ${appdir}/userdata/id_rsa ]]
+then
+ echo Please create ${appdir}/userdata/id_rsa and ${appdir}/userdata/id_rsa.pub with this command:
+ echo ssh-keygen -t rsa -b 2048
+ echo and transfer the public key ${appdir}/userdata/id_rsa.pub to your server where you want to 
+ echo connect your reverse tunnel to: put it on your server into the ~/.ssh/authorized_keys file 
+ echo or create the file if it isnt there yet.
+ exit 201
+fi
+
+privkey=${appdir}/userdata/id_rsa
+
+started=$(ps -ef | grep -v grep | grep checktunnel.sh| wc -l)
+if [[ "$started" -gt 3 ]]
+then
+ echo Already running $started processes
+ exit 0
+fi
+
+while true
+do
+restartservice=false
+revtunnel=$(ps -ef | grep -v grep |  grep "${remote_port}:localhost:22' | awk '{ print $2 }')
+ if [[ "$revtunnel" == "" ]]
+ then
+  ssh -o "ServerAliveInterval 30" -oStrictHostKeyChecking=no -i ${privkey} -f -N -R ${remote_port}:localhost:22 ${ssh_account}
+ elif [[ "$restartservice" == "true" ]]
+ then
+  kill $revtunnel
+  sleep 1
+  kill -9 $revtunnel
+  sleep 1
+  ssh -o "ServerAliveInterval 30"  -oStrictHostKeyChecking=no -i ${privkey} -f -N -R ${remote_port}:localhost:22 ${ssh_account}
+ fi
+
+ sleep 60
+
+done
