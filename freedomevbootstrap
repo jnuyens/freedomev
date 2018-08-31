@@ -1,3 +1,18 @@
 # checks for presence of freedomev USB stick and performs its magic
-# if stick is not present - does nothing
+# if stick is not present - does nothing - this way its easy to 
+# disable the entire freedomev system and not overload Tesla Service 
+# with strange requests. If you run into problems, reset the central
+# display and instrument cluster with the buttons on the steering wheel
+# and remove the freedomev USB stick
 
+#check if the USB stick is present
+usbstickpresent=$(cat /proc/partitions | grep sda1$)
+if [[ ${usbstickpresent} == "" ]]
+then 
+ exit 0
+ #we want to end as quickly as possible if we don't need to do anything
+fi
+ 
+#check if it's mounted
+
+#check if it contains the correct content
