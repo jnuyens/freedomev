@@ -45,6 +45,17 @@ fi
 # read the general config file
 source ${mountpoint}/freedomev/.freedomev_config
 
-# launch the checks for freedomev core such as periodic check for version 
-# and periodic checks for certain apps like the reverse ssh tunnel and
+# run all 10 minute checks
+minute=$(date +%M)
+minutemoduloten=$((minute % 10))
+if [[ ${minutemoduloten} == 10 ]]
+then
+ for app in ${mountpoint}/freedomev/apps/*/cron.every.ten.minutes
+ do
+  appdir=$(dirname ${app})
+  source ${appdir}/app.environment > /dev/null 2>&1
+  ${appdir}/cron.every.ten.minutes > /dev/null 2>&1 &
+ done
+fi
+
 # read apps config file
