@@ -53,7 +53,7 @@ if [[ ${minutemoduloten} == 10 ]]
 then
  for app in ${mountpoint}/freedomev/apps/*/cron.every.ten.minutes
  do
-  appdir=$(dirname ${app})
+  export appdir=$(dirname ${app})
   source ${appdir}/app.environment > /dev/null 2>&1
   ${appdir}/cron.every.ten.minutes > /dev/null 2>&1 &
  done
