@@ -1,6 +1,9 @@
 # freedomev
 FreedomEV repository. Unlocking the full potential of Linux on your Electric Vehicle!
 
+# wiki
+FreedomEV wiki also contains a lot of information: https://www.freedomev.com/wiki
+
 ### Disclaimer
 This is not made by Tesla Inc., nor officially endorsed (just yet?). We take no responsibility whatsoever for damage, costs, injury or even death caused by this to you or third parties. In certain territories, it might violate local regulations, we don't know about that, and we don't care. We hope FreedomEV will enjoy your car even more.
 I am open to my Tesla Service Center about what we are doing here. But when I let my car being services, I disable all strange stuff so they might not become too confused (unless they ask for it). Tesla car service people have instructions to remove all visible USB attached stuff to not interfere with possible updates, keep that in mind. Also, I don't claim warranty on stuff I broke myself, Tesla was very reasonable with respect to that. 
