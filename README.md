@@ -1,6 +1,8 @@
 # freedomev
 FreedomEV repository. Unlocking the full potential of Linux on your Electric Vehicle!
 
+# Currently the FreedomEV core doesn't work yet. Soon it will be ready to be launched with working basic functionality.
+
 # wiki
 FreedomEV wiki also contains a lot of information: https://www.freedomev.com/wiki
 
