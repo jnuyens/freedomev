@@ -31,7 +31,8 @@ fi
 #check if it's mounted
 
 # verify if the mount point didn't change and put into mountpoint variable
-mountpoint=/mnt/
+export mountpoint=/mnt/
+#ADD STUFFFF XXXXXXXXX
 
 #check if it contains the correct content 
 
