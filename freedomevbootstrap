@@ -1,3 +1,4 @@
+# bootstrap version 0.1
 # checks for presence of freedomev USB stick and performs its magic
 # if stick is not present - does nothing - this way its easy to 
 # disable the entire freedomev system and not overload Tesla Service 
@@ -12,7 +13,9 @@ then
  exit 0
  #we want to end as quickly as possible if we don't need to do anything
 fi
- 
+
 #check if it's mounted
 
 #check if it contains the correct content
+
+#launch the checks for freedomev core such as periodic check for version
