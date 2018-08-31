@@ -30,10 +30,21 @@ fi
 
 #check if it's mounted
 
+# verify if the mount point didn't change and put into mountpoint variable
+mountpoint=/mnt/
+
 #check if it contains the correct content 
 
 #check if its the first run
+if [[ -f ${mountpoint}/freedomev/firstrun ]]
+then
+ curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="Welcome to FreedomEV, enjoy!"
+ rm ${mountpoint}/freedomev/firstrun
+fi
+
+# read the general config file
+source ${mountpoint}/freedomev/.freedomev_config
 
 # launch the checks for freedomev core such as periodic check for version 
-# and periodic checks for certain apps like the reverse ssh tunnel and 
-
+# and periodic checks for certain apps like the reverse ssh tunnel and
+# read apps config file
