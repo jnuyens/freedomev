@@ -16,6 +16,7 @@ fi
 
 #check if it's mounted
 
-#check if it contains the correct content
+#check if it contains the correct content and if  
 
-#launch the checks for freedomev core such as periodic check for version
+#launch the checks for freedomev core such as periodic check for version and periodic checks for certain apps
+
