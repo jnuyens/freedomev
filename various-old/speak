@@ -1,0 +1,2 @@
+mountpoint=$(mount |grep /dev/sd | grep usb. | head -n1 | awk '{ print $3 }')
+gst-launch-0.10 playbin2 uri=file://${mountpoint}/$(chroot $mountpoint /freedomev/genspeak "$@") > /dev/null 2>&1
