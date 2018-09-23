@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ $# != 1 ]]
+then
+ echo "Error: please provide 1 argument between quotes to display on the Central Instrument Display"
+ exit 1
+fi
+
+#if more than 74 chars, cutting will occur.
+if [[ $( echo "$1" | wc -c) -gt 78 ]]
+then
+	echo "Warning: text more than 79 characters, clipping will occur"
+fi
+curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="$1"
