@@ -3,7 +3,7 @@ FreedomEV repository. Unlocking the full potential of Linux on your Electric Veh
 
 # Working towards FOSDEM launch next sunday!
 
-# wiki
+# Wiki
 FreedomEV wiki also contains a lot of information: https://www.freedomev.com/wiki
 
 ### Disclaimer
