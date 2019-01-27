@@ -1,0 +1,46 @@
+export LC_ALL=C
+source /etc/tesla.env
+
+for app in /freedomev/apps/*/everyminute/*
+do
+	source $app &
+done
+
+minutesofclock=$(date +%M)
+if [[ $(( minutesofclock % 5 )) = 0 ]]
+then
+	for app in /freedomev/apps/*/everyfiveminutes/*
+	do
+        	source $app &
+	done
+fi
+
+if [[ ${minutesofclock} = 0 ]]
+then
+        for app in /freedomev/apps/*/everyhour/*
+        do
+                source $app &
+        done
+fi     
+
+currentday=$(date +%Y%m%d)
+lastday=$(cat /var/spool/freedomev/periodic/lastday)
+if [[ ${currentday} != ${lastday} ]]
+then
+ for app in /freedomev/apps/*/everyday/*
+ do
+                source $app &
+ done
+ echo ${currentday} > /var/spool/freedomev/periodic/lastday
+fi
+
+currentmonth=$(date +%Y%m)
+lastday=$(cat /var/spool/freedomev/periodic/lastmonth)
+if [[ ${currentmonth} != ${lastmonth ]]
+then
+ for app in /freedomev/apps/*/everymonth/*
+ do
+                source $app &
+ done
+ echo ${currentmonth} > /var/spool/freedomev/periodic/lastmonth
+fi

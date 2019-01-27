@@ -1,0 +1,3 @@
+# Something like this:
+# export remote_port=1123
+# export ssh_account=your-ssh-account@yourserver.com

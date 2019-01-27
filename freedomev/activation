@@ -1,0 +1,12 @@
+export LC_ALL=C
+source /etc/tesla.env
+
+for app in /freedomev/apps/*
+do
+	application=$(echo app | awk -F/ '{ print $3 )')
+	if [ -f ${app}/activation ]
+	then
+		source $app/activation && curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="FreedomEV ${application} Activated" || curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="FreedomEV ${application} Failed to activate"
+	fi
+done
+
