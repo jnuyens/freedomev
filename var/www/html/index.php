@@ -1,145 +1,47 @@
 <html>
-<meta charset="utf-8"/>
-<TITLE>FreedomEV</TITLE>
-<?php
-switch ($_REQUEST['button']) {
-  case 'privacy':
-        system("sleep 2");
-        return "privacy on";
-        exit();
-  case 'devmode':
-    system("sleep 4");
-    return "devmode on";
-    exit();
-  case 'nosleep':
-    system("sleep 6");
-    return "nosleep on";
-    exit();
-  case 'hotspot':
-    system("sleep 3");
-    return "hotspot on";
-    exit();
-  // You can add more button-actions here
-}
-?>
-<script src="jquery.min.js"></script>
-<link href="bootstrap.min.css" rel="stylesheet" integrity="sha384-7An9J16huMQUD10RwMMROqeLnpyZwrifreo2VDJznCgr8zmXptO6CZQjiPcEDl8P" crossorigin="anonymous">
-<script src="bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<link href="font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-<script>
-$.when( $.ready ).then(function() {
-        $(".niceButton").on("click", function (ev) {
-          // Make spinner visible
-          $("#"+ev.currentTarget.id+" i").removeClass("d-none");
-          // Do ajax call
-          $.ajax({
-                url: 'index.php',
-                data: 'button='+ev.currentTarget.id
-          }).done(function() {
-          }).fail(function() {
-          }).always(function() {
-            // When the call returns: hide the spinner again
-            $("#"+ev.currentTarget.id+" i").addClass("d-none");
-          });
-    });
-});
-</script>
-
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  font-family: "Lato", sans-serif;
-    background-color: #333333;
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <TITLE>FreedomEV</TITLE>
 
-}
+  <script src="jquery.min.js"></script>
+  <link href="bootstrap.min.css" rel="stylesheet" />
+  <script src="bootstrap.min.js"></script>
+  <link href="css/all.min.css" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
 
-.sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #1a1a1a;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
+  <script>
+  $.when( $.ready ).then(function() {
+          $(".niceButton").on("click", function (ev) {
+            // Make spinner visible
+            $("#"+ev.currentTarget.id+" i").removeClass("d-none");
+            // Do ajax call
+            $.ajax({
+                  url: 'controller.php',
+                  data: 'button='+ev.currentTarget.id
+            }).done(function() {
+            }).fail(function() {
+            }).always(function() {
+              // When the call returns: hide the spinner again
+              $("#"+ev.currentTarget.id+" i").addClass("d-none");
+              
 
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #bfbfbf;
-  display: block;
-  transition: 0.3s;
-}
-
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-#main {
-  color: #bfbfbf;
-  transition: margin-left .5s;
-  padding: 16px;
-  background-color: #333333;
-}
-
-#hotspot {
-  color: #bfbfbf;
-  transition: margin-left .5s;
-  padding: 16px;
-  background-color: #333333;
-}
-
-#configuration {
-  color: #bfbfbf;
-  transition: margin-left .5s;
-  padding: 16px;
-  background-color: #333333;
-}
-
-#about {
-  color: #bfbfbf;
-  transition: margin-left .5s;
-  padding: 16px;
-  background-color: #333333;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-a:link {
-  color: white;
-}
-a:visited {
-  color: white;
-}
-</style>
+            });
+      });
+  });
+  </script>
 </head>
+
 <body>
 
 <div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a id=shortcutsmenu href="#" onclick="showshortcuts();">Shortcuts</a>
-  <a id=hotspotmenu href="#" onclick="showhotspot();">HotSpot Mode</a>
-  <a id=configurationmenu href="#" onclick="showconfiguration();" href="#">Configuration</a>
-  <a id=aboutmenu href="#" onclick="showabout();">About</a>
+  <a id="shortcutsmenu" href="#" class="nav-link active" onclick="showshortcuts('main');">Shortcuts</a>
+  <a id="hotspotmenu" href="#" class="nav-link"  onclick="showhotspot('hotspot');">HotSpot Mode</a>
+  <a id="configurationmenu" class="nav-link" href="#" onclick="showconfiguration('configuration');" href="#">Configuration</a>
+  <a id="aboutmenu" class="nav-link" href="#" onclick="showabout('about');">About</a>
 </div>
 
-<div id="main">
+<div id="main" class="mainscreen_section">
   <h2>Privacy Mode</h2>
   <p>Enable to stop all GPS, WiFi and 3G/4G connections to prevent vehicle location logging. Navigation, autopilot and online connections will stop working.</p>
    <a href="#" id="privacy" class="btn btn-primary niceButton">
@@ -169,7 +71,7 @@ a:visited {
 	<A HREF=https://abetterrouteplanner.com>https://abetterrouteplanner.com</a>
 </div>
 
-<div id="hotspot">
+<div id="hotspot" class="mainscreen_section">
   <h2>HotSpot Mode</h2>
   <p>With a USB WiFi adapter and a supported driver, you can use the Tesla provided 3G/4G Network to gain Internet access for other devices. Keep track of the use of the Tesla Network data volume so you can be properly billed.</p>
    <a href="#" id="hotspot" class="btn btn-primary niceButton">
@@ -180,7 +82,7 @@ a:visited {
 <P><BR>
 </div>
 
-<div id="configuration">
+<div id="configuration" class="mainscreen_section">
   <h2>Enable Reverse SSH Tunnel</h2>
   <p>If you have your own Linux server, this allows you to always connect to your car using the Secure Shell protocol through a reverse tunnel initiated by the car and periodically checked. Ensure your server is properly secured.</p>
 <BR>	Hostname:
@@ -193,7 +95,7 @@ a:visited {
 <BR>Togglebutton
 </div>
 
-<div id="about">
+<div id="about" class="mainscreen_section">
   <h2>FreedomEV version 1.0 release 2018020301</h2>
   <p><A HREF=http://www.freedomev.com>http://www.freedomev.com</a>
 <P><BR>
@@ -212,6 +114,7 @@ MastroGippo<BR><P>
 And the entire Linux Community.</p>
 </div>
 
+
 <script>
 function showshortcuts() {
   var x = document.getElementById("main");
@@ -222,8 +125,9 @@ function showshortcuts() {
   y.style.display = "none";
   z1.style.display = "none";
   z2.style.display = "none";
-  var h2s = document.getElementsById( 'shortcutsmenu' );
-  h2s[0].style.backgroundColor = 'blue';
+
+  $(".nav-link").removeClass("active");
+  $("#shortcutsmenu").addClass("active");
 }
 
 function showhotspot() {
@@ -235,6 +139,9 @@ function showhotspot() {
   y.style.display = "block";
   z1.style.display = "none";
   z2.style.display = "none";
+
+  $(".nav-link").removeClass("active");
+  $("#hotspotmenu").addClass("active");
 }
 
 function showconfiguration() {
@@ -246,6 +153,9 @@ function showconfiguration() {
   y.style.display = "none";
   z1.style.display = "block";
   z2.style.display = "none";
+
+  $(".nav-link").removeClass("active");
+  $("#configurationmenu").addClass("active");
 }
 
 function showabout() {
@@ -257,10 +167,12 @@ function showabout() {
   y.style.display = "none";
   z1.style.display = "none";
   z2.style.display = "block";
+
+  $(".nav-link").removeClass("active");
+  $("#aboutmenu").addClass("active");
 }
 
-openNav();
-showshortcuts();
+
 function openNav() {
   document.getElementById("mySidenav").style.width = "350px";
   document.getElementById("main").style.marginLeft = "350px";
@@ -276,4 +188,9 @@ function closeNav() {
   document.getElementById("configuration").style.marginLeft= "0";
   document.getElementById("about").style.marginLeft= "0";
 }
+
+// On init
+openNav();
+showshortcuts();
+
 </script>
