@@ -36,10 +36,9 @@ Go into the chrooted environment:
 ```
 bash /disk/*/freedomev/chroot
 ```
-Update to the latest version of FreedomEV:
+Update to the latest version of FreedomEV (execute in chroot on the stick / directory):
 ```
-rm /freedomev
-git clone http://www.github.com/jnuyens/freedomev
+git pull 
 ```
 
 And test it out! (see below)
