@@ -17,7 +17,7 @@ We also hope other electric car manufacturers will be inspired, and allow the co
 You need root access on the Central Instrument Display of your Tesla.
 Currently only tested on my Model X. I suppose it will also work on the Model S.
 The latest generation of Model S/X and the Model 3 might be more problematic 
-_for now_ as they use an Intel based board instead of the ARM based Linux system. If someone has root to such a Tesla, we might get FreedomEV working relative easily.
+_for now_ as they use an Intel based board instead of the ARM based Linux system. If someone has root to such a Tesla, we might get FreedomEV working. Aside from root access, we need some kind of 'persistence across reboot'. On the MCU 1.0 and 2.0 cars this is easily accomplished using the crontab as it reads from a read/writeable /var filesystem.
 
 ## Installation - easy way: prepare a USB stick from a Linux desktop system
 You need a USB stick to insert into the car - best 16 or 32GB, formatted as ext4.
