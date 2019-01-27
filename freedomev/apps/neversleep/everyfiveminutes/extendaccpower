@@ -1,0 +1,3 @@
+curl http://cid:4030/requestAccPower?seconds=600
+
+
