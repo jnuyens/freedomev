@@ -1,0 +1,3 @@
+www-data ALL=(ALL) NOPASSWD:/freedomev/tools/disable-app
+www-data ALL=(ALL) NOPASSWD:/freedomev/tools/enable-app
+www-data ALL=(ALL) NOPASSWD:/sbin/reboot
