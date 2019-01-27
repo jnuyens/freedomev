@@ -1,3 +1,0 @@
-[submodule "freedomev/freedomev/apps/hotspotmode/raspap-webgui"]
-	path = freedomev/freedomev/apps/hotspotmode/raspap-webgui
-	url = https://github.com/jnuyens/raspap-webgui.git

@@ -1,0 +1,23 @@
+#!/bin/bash
+app=$1
+if [[ ${app} == "" ]]
+then
+	echo Please provide app name as argument
+	exit 3
+fi
+if [[ $(basename $0) == 'enable-app' ]]
+then
+	if [[ ! -d /freedomev/apps-disabled/${app} ]]
+	then
+		echo No such disabled app called ${app}
+		exit 4
+	fi
+		mv /freedomev/apps-disabled/${app} /freedomev/apps/
+else
+	if [[ ! -d /freedomev/apps/${app} ]]
+	then
+		echo No such enabled app called ${app}
+                exit 5
+	fi
+	mv /freedomev/apps/${app} /freedomev/apps-disabled
+fi
