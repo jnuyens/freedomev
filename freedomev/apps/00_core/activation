@@ -1,0 +1,8 @@
+#starts web server for configuration of freeomev
+pkill nginx
+pkill php-fpm
+sleep 2
+service nginx start
+/etc/init.d/php7.2-fpm start
+
+

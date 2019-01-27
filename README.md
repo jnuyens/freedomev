@@ -39,6 +39,9 @@ bash /disk/*/freedomev/chroot
 Update to the latest version of FreedomEV (execute in chroot on the stick / directory):
 ```
 git pull 
+#webgui for hotspot mode is currently still a git submodule
+cd /var/www/html/raspap-webgui
+git pull
 ```
 
 And test it out! (see below)
