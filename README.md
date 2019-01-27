@@ -3,6 +3,8 @@ FreedomEV repository. Unlocking the full potential of Linux on your Electric Veh
 
 # Working towards FOSDEM launch next sunday!
 
+Official FOSDEM 2019 link: https://fosdem.org/2019/schedule/event/tesla_hacking/
+
 # Wiki
 FreedomEV wiki also contains a lot of information: https://www.freedomev.com/wiki
 
