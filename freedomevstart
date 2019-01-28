@@ -1,4 +1,4 @@
-# bootstrap version 2019012701
+# bootstrap version 2019012803
 # datestring needs to be at this position to verify if its the last version
 #
 # This script should be placed in /var/ and launched every minute out of cron
@@ -27,6 +27,7 @@ fi
 
 #function to kill remaining freedomev chrooted processes and umount
 function killandumount {
+ pkill php-fpm
  umount ${usbmountpoint}/proc/
  umount ${usbmountpoint}/sys
  umount ${usbmountpoint}/dev
@@ -84,16 +85,17 @@ fi
 echo freedomevstarted=${freedomevstarted}
 
 
-function checkversion {
+function checkbootstrapversion {
  #checks the first line of this file and possibly updates it
  # bootstrap version 2019012701
- runningversion=$(cat /var/freedomevstart | awk '{ print $4 }'
- usbversion=$(cat ${usbmountpoint}/freedomevstart)
+ runningversion=$(head -n 1 /var/freedomevstart | awk '{ print $4 }')
+ usbversion=$(head -n 1 ${usbmountpoint}/freedomevstart | awk '{ print $4 }')
  if [[ "$runningversion" != "$usbversion" ]]
  then
   cp ${usbmountpoint}/freedomevstart /var/freedomevstart 
   sync
-  curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="Please remove the US stick"
+  curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="FreedomEV core bootstrap updated!"
+  curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="Please remove the US stick then "
   curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message=" wait for FreedomEV to disable and reinsert"
  fi
 }
@@ -112,8 +114,8 @@ then
  mount -o remount,exec /opt/navigoff
  checkversion
  curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="FreedomEV Activated! Version: ${freedomevversion}"
- checkversion
  /usr/sbin/chroot ${usbmountpoint} /bin/bash /freedomev/tools/activation
+ checkbootstrapversion
 fi
 
 date >>  /tmp/removeinfreedomevstart 
