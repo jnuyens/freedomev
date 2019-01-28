@@ -110,9 +110,12 @@ Tom Van Braeckel<BR>
 nemSoma<BR>
 Jo Giraerts<BR>
 MastroGippo<BR><P>
+<BR>
+A special mention of this project - it will open up a lot of possibilities:<BR>
+<A HREF=https://github.com/lephisto/tesla-apiscraper>https://github.com/lephisto/tesla-apiscraper</A>
 
 And the entire Linux Community.</p>
-<A HREF=http://192.168.90.100/raspap-webgui>raspap-webgui</a>
+Test: <A HREF=http://192.168.90.100/raspap-webgui>raspap-webgui</a>
 </div>
 
 
