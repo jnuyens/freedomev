@@ -1,0 +1,9 @@
+#this run after installing the required packages and prior to activating the service
+lighttpd-enable-mod fastcgi-php
+ln -s /freedomev/apps/hotspotmode/raspap-webgui /var/www/html/raspap-webgui
+mkdir /etc/raspap
+mv /var/www/html/raspap.php /etc/raspap/
+chown -R www-data:www-data /etc/raspap
+mkdir /etc/raspap/hostapd
+mv /var/www/html/raspap-webgui/installers/*log.sh /etc/raspap/hostapd 
+cp /freedomev/apps/hotspotmode/raspap-webgui-sudoers /etc/sudoers.d/
