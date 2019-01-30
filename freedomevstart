@@ -1,4 +1,4 @@
-# bootstrap version 2019013004
+# bootstrap version 2019013006
 # datestring needs to be at this position to verify if its the last version
 #
 # This script should be placed in /var/ and launched every minute out of cron
@@ -39,6 +39,7 @@ function killandumount {
  umount ${usbmountpoint}/tmp
  umount ${usbmountpoint}/dev/pts
  umount -f ${usbmountpoint}
+ rm /tmp/freedomevmountpoint
  #check if no mount points are dangling
  curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="FreedomEV Disabled."
 }
@@ -56,7 +57,6 @@ then
  else 
   #we need to kill all possible processes who run on the removed rootfs from the USB stick and possibly umount
   killandumount 
-  rm /tmp/freedomevmountpoint
  fi
 fi
 
@@ -123,10 +123,6 @@ then
  checkbootstrapversion
 fi
 
-date >>  /tmp/removeinfreedomevstart 
 #launch the checks for freedomev core such as periodic check for version and periodic checks for certain apps
 export usbmountpoint freedomevversion
 /usr/sbin/chroot ${usbmountpoint} /bin/bash /freedomev/runperiodic
-#we presume all installed apps can run their periodics in parallel
-date >> /tmp/removeinfreedomevstart 
-
