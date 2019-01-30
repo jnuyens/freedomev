@@ -1,0 +1,5 @@
+{
+	"name": "FreedomEV Core",
+	"description": "Freedom ev config screen and such implemented as an app",
+	"configinterfacevisible": "hidden"
+}
