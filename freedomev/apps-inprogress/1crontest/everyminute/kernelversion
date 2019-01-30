@@ -1,0 +1,4 @@
+kernelversion=$(uname -r)
+date >> /tmp/bla2
+uptime=$(uptime -p)
+curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="Running ${kernelversion}. ${uptime}"
