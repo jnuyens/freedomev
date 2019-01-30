@@ -1,5 +1,58 @@
 #!/bin/bash
+echo
 echo Script to install FreedomEV
+#detect if we are running chrooted by checking if the root of the init process
+#is the same as the root of this process
+if [[ "$(stat -c %d:%i /)" != "$(stat -c %d:%i /proc/1/root/.)" ]] 
+then
+ echo This is not supposed to run chrooted
+ exit 2
+fi
+echo Not running chrooted: OK
+
 #detecting if it's already installed
+alreadyinstalled=$(crontab -l | grep /var/freedomev)
+if [[ "$alreadyinstalled" != "" ]]
+then
+	echo FreedomEV is already installed
+	exit 3
+fi
+echo Not yet installe: OK
+
 #detecting if its a supported car
-#installing
+hw_ap=$(cat /var/etc/dashw)
+# empty is pre-DAS
+# 0 is DAS0 (harnessed for DAS2.0, but no DAS ECU installed)
+# 1 is DAS1
+# 2 is DAS2.0
+# 3 is DAS2.5
+# 4 is DAS3.0
+# /var/etc/dashw doesn't exist on Model 3
+case "$hw_ap" in 
+	 0 | 1 )
+		 echo Detected DAS${hw_ap}, support for FreedomEV currently unconfirmed.
+		 echo Are you sure you want to continue?
+		 echo press y and enter to confirm or something else to abord.
+		 read feedback
+		 if [[ "$feedback" != "y" ]]
+			then
+				echo Not confirmed, aborting. Not installed.
+				echo Hope to see you back when support for your car is confirmed
+				exit 4
+		 else
+			echo Please Report back if FreedomEV works on your car so we can confirm it works as it should
+			echo If it does not behave as it should, use the remove script to clean up or just disable the crontab entry.
+		 fi
+		;;
+	2 )
+		echo Detected DAS2.0: OK
+		;;
+	*) 
+		echo "You can try to help support FreedomEV on these Intel based cars, but it requires another Intel based Ubuntu rootfs and probably many other modifications. Aborting automatic installation."
+		;;
+esac
+
+#installing crontab
+curl -s https://raw.githubusercontent.com/jnuyens/freedomev/master/freedomevstart > /var/freedomevstart || exit 5
+echo /var/freedomevstart download: OK
+
