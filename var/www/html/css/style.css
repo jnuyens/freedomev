@@ -75,3 +75,12 @@ div.content {
 .table {
   color: #bfbfbf;
 }
+
+.togglebox {
+  float: left;
+  margin-right: 32px;
+}
+
+.app_description {
+  margin-left: 58px;
+}
