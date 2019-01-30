@@ -1,4 +1,4 @@
-# bootstrap version 2019013001
+# bootstrap version 2019013004
 # datestring needs to be at this position to verify if its the last version
 #
 # This script should be placed in /var/ and launched every minute out of cron
@@ -30,7 +30,7 @@ function killandumount {
  #run all deactivation scripts
  for deactivationscript in /tmp/freedomev/*
  do
-  bash ${deactivationscript}
+  bash ${deactivationscript} && rm ${deactivationscript}
  done
  #umount filesystems
  umount ${usbmountpoint}/proc/
