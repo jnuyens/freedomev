@@ -1,0 +1,114 @@
+#!/bin/bash -x
+#
+# Run the Factory speaker test.
+#
+
+#added env
+. /etc/tesla.env
+. $TESLA_BIN/RunQtCar.vars
+
+#changed logging
+LOG="echo "
+SPEAKERS="lft rft lfm rfm lfw rfw lrd rrd lrk rrk ctr sub ext"
+
+#removed usb key requirement with sounds on them as they are also available on the system
+#if [ $(grep -i usb /proc/mounts | wc -l) != 1 ]; then
+#    $LOG "Error: Exactly one USB key must be inserted."
+#    exit 1
+#fi
+
+#USBPATH=$(grep -i usb /proc/mounts | cut -d' ' -f2)
+#if ! ls $USBPATH/*.wav >/dev/null 2>&1; then
+#    $LOG "Error: No wav files in $USBPATH"
+# exit 1
+#fi
+
+USBPATH=/usr/tesla/UI/assets/sounds/WAV/
+
+SX=$(lv VAPI_carType)
+BP=$(lv VAPI_audioType)
+BP=${BP:1:1}
+
+case "${SX:1:1}$BP" in
+    SB) WPREFIX=MS_bs ;;
+    SP) WPREFIX=MS_pr ;;
+    XB) WPREFIX=MX_bs ;;
+    XP) WPREFIX=MX_pr ;;
+    *)  $LOG "Error: Something wrong with car/audio type SX=$SX BP=$BP"; exit 1 ;;
+esac
+
+
+# Reset the DSP (see audiod/DSP.cpp) and exit.
+reset_dsp_and_exit() {
+    $LOG "Resetting DSP..."
+    echo 1 > /sys/class/gpio/gpio24/value ; sleep 1
+    echo 0 > /sys/class/gpio/gpio24/value ; sleep 1
+    exit 0
+}
+
+# Doors closed and no one in driver's seat.
+wait_for_driver_to_leave() {
+    while [ $(lv VAPI_driverPresent) = '"true"' ] || [ $(lv VAPI_doorState) != '"None"' ]; do
+        $LOG "Waiting for driver to leave and door to close"
+        sleep 1
+    done
+}
+
+# Turn the indicated speakers off.
+speakers_off() {
+    $LOG "Turning off $*"
+    for spkr in $*; do
+        # SW-69634: adjusting gain does not affect speaker output.
+        #dspt --speaker-off $spkr
+        dspt --speaker-trim $spkr:0
+    done
+}
+
+# Turn the indicated speakers on.
+speakers_on() {
+    $LOG "Turning on $*"
+    for spkr in $*; do
+        # SW-69634: adjusting gain does not affect speaker output.
+        #dspt --speaker-on $spkr
+        dspt --speaker-trim $spkr:1
+    done
+}
+
+# One step of the test.
+#   $1 = audio file
+#   $* = speakers to enable
+step() {
+    file="$USBPATH/${WPREFIX}_$1.wav"
+    shift
+    speakers_on $*
+    aplay $file || $LOG "Error: Failed to play $file"
+    speakers_off $*
+    sleep 2
+}
+
+# Pretend to touch the screen a bunch to keep the MCU awake.
+keepawake() {
+    sdv GUI_lastTouchTime 1
+}
+
+
+wait_for_driver_to_leave
+
+keepawake
+sleep 2
+
+$LOG "Initializing DSP for test..."
+trap reset_dsp_and_exit TERM
+dspt --factory-start
+
+while true; do
+    step front    lfm lft lfw rfm rft rfw
+    step reardoor lrd rrd
+    if [ $BP = "P" ]; then
+        step liftgate lrk rrk
+    fi
+    step ctrsub   ctr sub
+    keepawake
+done
+
+exit 0

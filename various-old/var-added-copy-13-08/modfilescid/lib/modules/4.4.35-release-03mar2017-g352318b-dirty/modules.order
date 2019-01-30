@@ -1,0 +1,4 @@
+kernel/crypto/echainiv.ko
+kernel/drivers/scsi/ch.ko
+kernel/drivers/input/touchscreen/atmel_mxt_ts.ko
+kernel/drivers/hid/hid-multitouch.ko
