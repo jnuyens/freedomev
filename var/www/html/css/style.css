@@ -1,16 +1,16 @@
 body {
   font-family: "Lato", sans-serif;
-  background-color: #333333;
+  background-color: #1a1a1a;
 }
 
 .sidenav {
   height: 100%;
-  width: 0;
+  width: 350px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #1a1a1a;
+  background-color: #0a0a0a;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -20,13 +20,13 @@ body {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
-  color: #bfbfbf;
+  color: #cfcfcf;
   display: block;
   transition: 0.3s;
 }
 
 .sidenav a:hover {
-  color: #f1f1f1;
+  color: #bfbfbf;
 }
 
 .sidenav .closebtn {
@@ -41,20 +41,37 @@ body {
   color: #bfbfbf;
   transition: margin-left .5s;
   padding: 16px;
-  background-color: #333333;
+  background-color: #1a1a1a;
 }
 
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
-a:link {
+/* a:link {
   color: white;
 }
 a:visited {
   color: white;
-}
+} */
 
 a.nav-link.active {
-  background-color: #333333;
+  background-color: #1a1a1a;
+  color: white;
+}
+
+.checkbox-label:after{
+  content:attr(data-off);
+}
+
+.js-switch:checked ~ .checkbox-label:after {
+  content:attr(data-on);
+}
+
+div.content {
+  margin-left: 350px;
+}
+
+.table {
+  color: #bfbfbf;
 }
