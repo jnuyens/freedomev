@@ -1,3 +1,8 @@
+#script called by /var/freedomevstart from the car
+#runs all activation scripts
+#and installs all deactivation scripts
+#and reports to the user
+
 export LC_ALL=C
 source /etc/tesla.env
 source /freedomev/tools/freedomev.env
@@ -7,9 +12,16 @@ do
 	application=$(echo ${app} | awk -F\/ '{ print $4 }')
 	if [ -f ${app}/activation ]
 	then
-		if [[ -f ${app}/description.json ]]
-			application=$(grep -i 'name:' ${app}/description.json| awk -F\" '{ print $2}')
+		if [[ -f ${app}/deactivation ]]
+		then
+			mkdir /tmp/freedomev 2>/dev/null
+			cp ${app}/deactivation /tmp/freedomev/$application-deactivation
 		fi
+                if [[ -f ${app}/description.json ]]
+                then
+                        application=$(grep -i 'name:' ${app}/description.json| awk -F\" '{ print $2}')
+                fi
+
 		source $app/activation && cid-message "FreedomEV ${application} Activated" || cid-message "FreedomEV ${application} Failed to activate"
 	fi
 done
