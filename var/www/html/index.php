@@ -45,57 +45,24 @@
 
                 $id = str_replace(' ', '_', strtolower($app['name']));
 ?>
-        <h2><?php echo $app['name']; ?></h2>
-        <p><?php echo $app['description']; ?> </p>
         <div class="togglebox">
             <input id="<?php echo $id; ?>" name="<?php echo $id; ?>" type="checkbox" class="js-switch" <?php echo $app['enabled'] ? 'checked' : ''; ?> />
             <i id="spinner_privacy" class="fa fa-spinner fa-pulse fa-fw margin-bottom d-none"></i>
             <span class="sr-only">Loading...</span>
+            <h2 class="d-inline"><?php echo $app['name']; ?></h2>
+            <p class="app_description"><?php echo $app['description']; ?> </p>
         </div>
+        <div class="clearfix"></div>
         <p><br>
 <?php
             }
 
 ?>
-
-<!---->
-<!--        <h2>Developer Mode</h2>-->
-<!--        <p>Enable internal Tesla Developer Mode.</p>-->
-<!--        <div class="togglebox">-->
-<!--            <input id="devmode" name="devmode" type="checkbox" class="js-switch" --><?php //echo $shortcuts['devmode'] ?><!-- />-->
-<!--            <i id="spinner_devmode" class="fa fa-spinner fa-pulse fa-fw margin-bottom d-none"></i>-->
-<!--            <span class="sr-only">Loading...</span>-->
-<!--            <label for="privacy" class="checkbox-label" data-off="Developer mode off" data-on="Developer mode on"></label>-->
-<!--        </div>-->
-<!---->
-<!--        <p><br>-->
-<!--        <h2>No Sleep Mode</h2>-->
-<!--        <p>Disable the sleeping of computer systems for remote working. Will induce more vampiric drain of the battery.-->
-<!--            Keeps the USB ports powered and Autopilot powered on.</p>-->
-<!--        <div class="togglebox">-->
-<!--            <input id="nosleep" name="nosleep" type="checkbox" class="js-switch" --><?php //echo $shortcuts['nosleep'] ?><!-- />-->
-<!--            <i id="spinner_nosleep" class="fa fa-spinner fa-pulse fa-fw margin-bottom d-none"></i>-->
-<!--            <span class="sr-only">Loading...</span>-->
-<!--            <label for="nosleep" class="checkbox-label" data-off="No Sleep Mode off" data-on="No Sleep Mode on"></label>-->
-<!--        </div>-->
-<!---->
-<!--        <p><br/>-->
-<!--        <h2>HotSpot Mode</h2>-->
-<!--        <p>With a USB WiFi adapter and a supported driver, you can use the Tesla provided 3G/4G Network to gain Internet-->
-<!--            access for other devices. Keep track of the use of the Tesla Network data volume so you can be properly-->
-<!--            billed.</p>-->
-<!--        <div class="togglebox">-->
-<!--            <input id="hotspot" name="hotspot" type="checkbox" class="js-switch" --><?php //echo $shortcuts['hotspot'] ?><!-- />-->
-<!--            <i id="spinner_hotspot" class="fa fa-spinner fa-pulse fa-fw margin-bottom d-none"></i>-->
-<!--            <span class="sr-only">Loading...</span>-->
-<!--            <label for="hotspot" class="checkbox-label" data-off="Hotspot Mode off" data-on="Hotspot Mode on"></label>-->
-<!--        </div>-->
-<!--        <a href="/raspap-webgui">Open Hotspot Dashboard</a>-->
-
-        <p><br/>
-        <h2>A Better Route Planner</h2>
-        <p>Multi-stop accurate routeplanner</p>
-        <A HREF=https://abetterrouteplanner.com>https://abetterrouteplanner.com</a>
+        <div class="app_description">
+            <h2>A Better Route Planner</h2>
+            <p>Multi-stop accurate routeplanner</p>
+            <A HREF=https://abetterrouteplanner.com>https://abetterrouteplanner.com</a>
+        </div>
     </div>
 
     <div id="configuration" class="mainscreen_section">
