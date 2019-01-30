@@ -10,7 +10,7 @@ do
 		if [[ -f ${app}/description.json ]]
 			application=$(grep -i 'name:' ${app}/description.json| awk -F\" '{ print $2}')
 		fi
-		source $app/activation && curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="FreedomEV ${application} Activated" || curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="FreedomEV ${application} Failed to activate"
+		source $app/activation && cid-message "FreedomEV ${application} Activated" || cid-message "FreedomEV ${application} Failed to activate"
 	fi
 done
 
