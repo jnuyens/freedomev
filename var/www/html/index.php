@@ -6,8 +6,8 @@
         'hotspot' => '',
     ];
 
-    // $registry = explode("\n", `lvs`);
-    $registry = explode("\n", file_get_contents("lvs_example.txt"));
+    $registry = explode("\n", `lvs`);
+//    $registry = explode("\n", file_get_contents("lvs_example.txt"));
     array_shift($registry); // throw away the first item since it's a header
 //    // Now we're going to sort the registry into categories:
 //    foreach ($registry as $row) {
