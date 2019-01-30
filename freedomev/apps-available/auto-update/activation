@@ -1,0 +1,3 @@
+#when the USB stick is rediscovered this script will run again to possibly clean up
+#previous process leftovers and relaunch whatever processes need to be launched
+

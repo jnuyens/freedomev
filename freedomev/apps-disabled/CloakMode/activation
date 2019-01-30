@@ -1,5 +1,0 @@
-#disable GPS, WiFi and 3/4G and autopilot
-curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="Cloak Mode disables Autopilot, GPS, WiFi and 3/4G"
-curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="It makes you invisble for tracking by the vehicle and Mobile Phone poles."
-curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="Mapping, music streaming stop working."
-curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="As it could be abused, enter pin-to-drive to enable."

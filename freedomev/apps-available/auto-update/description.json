@@ -1,0 +1,4 @@
+{
+	name: "Automatically update FreedomEV",
+	description: "Daily check and automatically update FreedomEV from the github content"
+}
