@@ -7,17 +7,12 @@ then
 fi
 if [[ $(basename $0) == 'enable-app' ]]
 then
-	if [[ ! -d /freedomev/apps-disabled/${app} ]]
-	then
-		echo No such disabled app called ${app}
-		exit 4
-	fi
-		mv /freedomev/apps-disabled/${app} /freedomev/apps/
+	ln -s /freedomev/apps-available/${app} /freedomev/apps/
+	/freedomev/apps/${app}/activation
 else
-	if [[ ! -d /freedomev/apps/${app} ]]
+	if [ -x /freedomev/apps/${app}/deactivation ]
 	then
-		echo No such enabled app called ${app}
-                exit 5
+		/freedomev/apps/${app}/deactivation
 	fi
-	mv /freedomev/apps/${app} /freedomev/apps-disabled
+	rm /freedomev/apps/${app} 
 fi

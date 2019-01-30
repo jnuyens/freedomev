@@ -1,0 +1,2 @@
+#!/bin/bash
+curl -s "http://cid:4035/Debug/get_data_values?format=csv&show_invalid=true"
