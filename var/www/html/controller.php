@@ -5,11 +5,11 @@ switch ($_REQUEST['command']) {
 
       // Enable
       if ($_REQUEST['value'] === '1')
-        return exec("/freedomev/tools/enable-app $appfoldername");
+        return exec("sudo /freedomev/tools/enable-app $appfoldername");
 
       // Disable
       if ($_REQUEST['value'] === '0')
-          return exec("/freedomev/tools/disable-app $appfoldername");
+          return exec("sudo /freedomev/tools/disable-app $appfoldername");
 
       echo ""; die;
 
