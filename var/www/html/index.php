@@ -5,14 +5,6 @@
         'nosleep' => 'checked',
         'hotspot' => '',
     ];
-
-    $registry = explode("\n", `lvs`);
-//    $registry = explode("\n", file_get_contents("lvs_example.txt"));
-    array_shift($registry); // throw away the first item since it's a header
-//    // Now we're going to sort the registry into categories:
-//    foreach ($registry as $row) {
-//
-//    }
 ?>
 <html>
 <head>
@@ -108,32 +100,7 @@
         <br/>Togglebutton
     </div>
 
-    <div id="registry" class="mainscreen_section">
-        <table class="table table-striped">
-    <?php
-
-        foreach ($registry as $row) {
-            $data = str_getcsv($row);
-            echo '<tr scope="row">';
-
-            // varname
-            $varname = $data[0];
-            echo "<td>".$varname."</td>";
-
-            // The value
-            $value = $data[1];
-?>
-            <td>
-                <input id="<?php echo $varname; ?>" name="<?php echo $varname; ?>" type="text" value="<?php echo $value; ?>" class="form-control registry-input" />
-                <i class="fa fa-spinner fa-pulse fa-fw margin-bottom d-none"></i>
-                <span class="sr-only">Loading...</span>
-            </td>
-<?php
-            echo "</tr>";
-        }
-    ?>
-        </table>
-    </div>
+    <div id="registry" class="mainscreen_section"></div>
 
     <div id="about" class="mainscreen_section">
         <h2>FreedomEV version 1.0 release 2018020301</h2>
@@ -206,37 +173,25 @@
 
       });
     });
-
-    // Event handler for the registry inputs
-    $(".registry-input").on("change", function (ev) {
-      console.log(ev);
-
-      // Do ajax call
-      $.ajax({
-        url: 'controller.php',
-        data: {
-          command: 'update_lvs',
-          key: ev.currentTarget.id,
-          value: $(ev.currentTarget).val()
-        }
-      }).done(function () {
-      }).fail(function () {
-      }).always(function () {
-
-        // When the call returns: hide the spinner again
-        $("#" + ev.currentTarget.id + "~ i").addClass("d-none");
-
-      });
-    });
   });
 
   // When you click on a menuitem on the left
   function showSection(section) {
+    switch (section) {
+      case "registry":
+        $("#registry").load("controller.php?command=load_lvs");
+        break;
+      default:
+        $("#registry").html(""); // make sure registry is empty again
+        break;
+    }
+
     $(".mainscreen_section").css('display', 'none');
     $("#" + section).css('display', 'block');
 
     $(".nav-link").removeClass("active");
     $("#" + section + "menu").addClass("active");
+
   }
 
 </script>
