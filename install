@@ -14,7 +14,7 @@ echo Not running chrooted: OK
 alreadyinstalled=$(crontab -l | grep /var/freedomev)
 if [[ "$alreadyinstalled" != "" ]]
 then
-	echo FreedomEV is already installed
+	echo FreedomEV is already installed: installation aborted
 	exit 3
 fi
 echo Not yet installe: OK
@@ -56,3 +56,10 @@ esac
 curl -s https://raw.githubusercontent.com/jnuyens/freedomev/master/freedomevstart > /var/freedomevstart || exit 5
 echo /var/freedomevstart download: OK
 
+crontab -l > /tmp/crontab
+echo '* * * * * /bin/bash /var/freedomevstart' >> /tmp/crontab 
+echo '@reboot /bin/bash /var/freedomevstart' >> /tmp/crontab
+cat /tmp/crontab | crontab || exit 6
+echo Crontab installed: OK
+
+/var/freedomevstart
