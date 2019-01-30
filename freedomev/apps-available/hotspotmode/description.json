@@ -1,4 +1,4 @@
 {
   "name": "Hotspot Mode",
-  "description": "With a USB WiFi adapter and a supported driver, you can use the Tesla provided 3G/4G Network to gain Internet access for other devices. Keep track of the use of the Tesla Network data volume so you can be properly billed."
+  "description": "With a USB WiFi adapter and a supported driver, you can use the Tesla provided 3G/4G Network to gain Internet access for other devices. Keep track of the use of the Tesla Network data volume so you can be properly billed. <br/> <a href=\"/raspap-webgui\">Open Hotspot Dashboard</a>"
 }
