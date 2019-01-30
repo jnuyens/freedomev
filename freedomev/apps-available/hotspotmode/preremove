@@ -1,6 +1,0 @@
-#this runs to remove possible stuff
-#lighttpd-disable-mod fastcgi-php  #can be enabled by other apps too
-rm /var/www/html/raspap-webgui
-rm -rf /etc/raspap
-rm /etc/sudoers.d/raspap-webgui-sudoers
-
