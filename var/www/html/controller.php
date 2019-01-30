@@ -1,17 +1,18 @@
 <?php
 switch ($_REQUEST['command']) {
-  case 'privacy':
-    system("sleep 2");
-    return "privacy on";
-  case 'devmode':
-    system("sleep 4");
-    return "devmode on";
-  case 'nosleep':
-    system("sleep 6");
-    return "nosleep on";
-  case 'hotspot':
-    system("sleep 3");
-    return "hotspot on";
+  case 'enable_disable_app':
+      $appfoldername = $_REQUEST['key'];
+
+      // Enable
+      if ($_REQUEST['value'] === '1')
+        return exec("/freedomev/tools/enable-app $appfoldername");
+
+      // Disable
+      if ($_REQUEST['value'] === '0')
+          return exec("/freedomev/tools/disable-app $appfoldername");
+
+      echo ""; die;
+
   case "update_lvs":
 //    echo "http://192.168.90.100:4035/set_data_value?name={$_REQUEST['key']}&value={$_REQUEST['value']}";
 //    die;

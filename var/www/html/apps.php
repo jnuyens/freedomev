@@ -18,8 +18,10 @@
                 $app['enabled'] = false;
             }
 
+            $app['id'] = basename($appname);
             $app['name'] = isset($app['name']) ? $app['name'] : "Untitled app";
             $app['description'] = isset($app['description']) ? $app['description'] : "This app has no description yet";
+
         }
         $apps[] = $app;
         }

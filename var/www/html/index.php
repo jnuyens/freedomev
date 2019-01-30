@@ -43,15 +43,16 @@
                 // Skip invisible apps
                 if (isset($app['configinterfacevisible']) && $app['configinterfacevisible'] === "hidden") continue;
 
-                $id = str_replace(' ', '_', strtolower($app['name']));
+                $id = $app['id'];
 ?>
         <div class="togglebox">
             <input id="<?php echo $id; ?>" name="<?php echo $id; ?>" type="checkbox" class="js-switch" <?php echo $app['enabled'] ? 'checked' : ''; ?> />
             <i id="spinner_privacy" class="fa fa-spinner fa-pulse fa-fw margin-bottom d-none"></i>
             <span class="sr-only">Loading...</span>
-            <h2 class="d-inline"><?php echo $app['name']; ?></h2>
-            <p class="app_description"><?php echo $app['description']; ?> </p>
         </div>
+        <h2 class="d-inline"><?php echo $app['name']; ?></h2>
+        <p class="app_description"><?php echo $app['description']; ?> </p>
+
         <div class="clearfix"></div>
         <p><br>
 <?php
@@ -142,7 +143,8 @@
       $.ajax({
         url: 'controller.php',
         data: {
-          command: ev.currentTarget.id,
+          command: "enable_disable_app",
+          key: ev.currentTarget.id,
           value: ev.currentTarget.checked ? 1 : 0
         }
       }).done(function () {
