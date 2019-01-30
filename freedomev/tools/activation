@@ -19,7 +19,7 @@ do
 		fi
                 if [[ -f ${app}/description.json ]]
                 then
-                        application=$(grep -i 'name:' ${app}/description.json| awk -F\" '{ print $2}')
+                        application=$(grep -i 'name:' ${app}/description.json| awk -F\" '{ print $4}')
                 fi
 
 		source $app/activation && cid-message "FreedomEV ${application} Activated" || cid-message "FreedomEV ${application} Failed to activate"
