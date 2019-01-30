@@ -114,6 +114,8 @@
 </div>
 
 <script>
+    js_switch_lock = false;
+
   $.when($.ready).then(function () {
     // On init
     showSection('shortcuts');
@@ -136,8 +138,23 @@
 
     // Event handler for the toggle buttons
     $(".js-switch").on("change", function (ev) {
+//      console.log("lock:", js_switch_lock);
+
+      if (js_switch_lock) {
+//        console.log("Ignoring change event");
+        return;
+      }
+
+      // Set a lock
+      js_switch_lock = true;
+
       // Make spinner visible
       $("#" + ev.currentTarget.id + "~ i").removeClass("d-none");
+
+      // Set timer to unlock
+      setTimeout(function () {
+        js_switch_lock = false;
+      }, 2000);
 
       // Do ajax call
       $.ajax({
@@ -153,8 +170,7 @@
 
         // When the call returns: hide the spinner again
         $("#" + ev.currentTarget.id + "~ i").addClass("d-none");
-
-
+//        js_switch_lock = false; // unlock
       });
     });
   });
