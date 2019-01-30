@@ -1,0 +1,5 @@
+#!/bin/bash
+echo Script to install FreedomEV
+#detecting if it's already installed
+#detecting if its a supported car
+#installing
