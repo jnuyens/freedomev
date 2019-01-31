@@ -1,5 +1,7 @@
 # freedomev
 FreedomEV repository. Unlocking the full potential of Linux on your Electric Vehicle!
+Getting ready to support Model S and X with MCU 2.0 - MCU 1.0 will probably work too; still unconfirmed.
+Newer Model S and X and Model 3 have an Intel based MCU, porting should be doable; other location for persistent launch and storage might be needed as well as other adjustments. If you have root on such a car and would like to explore, contact us. Similar for other Electric Vehicles with Linux running on them.
 
 # Working towards FOSDEM launch next sunday!
 
@@ -10,16 +12,37 @@ FreedomEV wiki also contains a lot of information: https://www.freedomev.com/wik
 
 ### Disclaimer
 This is not made by Tesla Inc., nor officially endorsed (just yet?). We take no responsibility whatsoever for damage, costs, injury or even death caused by this to you or third parties. In certain territories, it might violate local regulations, we don't know about that, and we don't care. We hope FreedomEV will enjoy your car even more.
-I am open to my Tesla Service Center about what we are doing here. But when I let my car being services, I disable all strange stuff so they might not become too confused (unless they ask for it). Tesla car service people have instructions to remove all visible USB attached stuff to not interfere with possible updates, keep that in mind. Also, I don't claim warranty on stuff I broke myself, Tesla was very reasonable with respect to that. 
-We build this so all changes, apps and additions are on a USB stick. So, when you remove that and reboot the systems, everything is back like it was before.
-We hope Tesla will provide - in a not too distant future - a legitimate way for owners to get root on your own car. For example by allowing owners to request a secret ssh token through their web account or car app. But nothing is certain until Elon Musk tweets about it ;)
+I am tell my Tesla Service Center about what we are doing here. When the car is serviced, I disable all strange stuff so they might not become too confused (unless they ask for it). Tesla car service people have instructions to remove all visible USB attached stuff to not interfere with possible updates, which is a good thing. Also, I don't claim warranty on stuff I broke myself, Tesla has been very reasonable with respect to that. 
+We build this so all changes, apps and additions are on a USB stick. So, when you remove that and reboot the systems, everything is back like it was before. The '/var/freedomevstart' script is the only persistent addition and it stops immediately if the USB stick is not detected.
+
+We hope Tesla will provide - in a not too distant future - a legitimate way for owners to get root on your own car. For example by allowing owners to request a secret ssh token through their web account or car app. Nothing is certain until Elon Musk tweets about it ;)
 We also hope other electric car manufacturers will be inspired, and allow the community to grow beyond what we currently imagine.
 
 ## Prerequisites
-You need root access on the Central Instrument Display of your Tesla.
-Currently only tested on my Model X. I suppose it will also work on the Model S.
+You need root access on the Central Instrument Display of your Tesla Model S or Model X with MCU 2.0 (arm based).
+Currently only tested on my Model X. I suppose it will also work on the Model S as the architecture is very similar.
 The latest generation of Model S/X and the Model 3 might be more problematic 
 _for now_ as they use an Intel based board instead of the ARM based Linux system. If someone has root to such a Tesla, we might get FreedomEV working. Aside from root access, we need some kind of 'persistence across reboot'. On the MCU 1.0 and 2.0 cars this is easily accomplished using the crontab as it reads from a read/writeable /var filesystem.
+Model 3 cars are even better closed down and harder to root. Tesla gives high bug bounties for those people finding root exploits and/or persistence across reboots; thus ensuring everybody their cars are safer. These tools and FreedomEV can help security researchers to better analyse and find potential problems.
+With root access, FreedomEV can be installed with one command:
+```
+curl https://raw.githubusercontent.com/jnuyens/freedomev/master/install | sh
+
+```
+A shorter URL is available too:
+```
+curl https://is.gd/zbzMEf | sh
+```
+To fully remove FreedomEV - this will remove the /var/freedomevstart and crontab entry run:
+```
+curl https://raw.githubusercontent.com/jnuyens/freedomev/master/remove | sh
+```
+Or similar a shorter URL is available too:
+```
+curl https://is.gd/NLpzpr | sh
+```
+
+Additionally a USB stick with the 'Ubuntu for NVIDIA Tegra' based image is necessary:
 
 ## Installation - easy way: prepare a USB stick from a Linux desktop system
 You need a USB stick to insert into the car - best 16 or 32GB, formatted as ext4.
@@ -58,17 +81,17 @@ apt-get install flex bison liblzo2-dev texinfo zlib1g-dev zlib1g ncurses-dev g++
 
 On your usb stick you can go to the / filesystem directory and 
 ```
-git clone http://www.github.com/jnuyens/freedomev
+git clone http://www.github.com/jnuyens/freedomev .
 ```
 For easy access to the applications, adjust your path:
 ```
-echo "export PATH=$PATH:/freedomev" >> ~/.bash_profile
+echo "export PATH=$PATH:/freedomev/tools" >> ~/.bash_profile
 source ~/.bash_profile
 ```
 
 ### Test it out:
 ```
-say "FreedomEV Upgrade Initiated, prepare to be Pan Galactic Gargleblasted!"
+cid-message "FreedomEV Upgrade Initiated, prepare to be Pan Galactic Gargleblasted!"
 ```
 This should show this message on your central display
 
@@ -80,18 +103,18 @@ This should make the colors on you Instrument Cluster (behind the steering wheel
 
 
 ## How to contribute:
-```
-git pull 
-```
-This gets the latest changes from the server and merges them with your changes
-```
-commit -m "My first addition to FreedomEV"
-```
-This marks your changes into a commit ready to be pushed to github
-```
-git push 
-```
-This actually sends your changes to this project. 
+Have a look at the various directories in /freedomev/apps-available they all have a similar structure. These are the apps which are currently available in FreedomEV. Each app is using its own directory. If an app is enabled, a symbolic link is created in the /freedomev/apps directory to the /freedomev/apps-available directory.
+Adding an app or feature is simple.
+The most complete way to start out, is by looking at the 0template app in the /freedomev/apps-inprogress/ directory. In this directory apps are located which are not ready 'for prime time' yet, you can see if there's something you can contribute to.
+These are the files and directories in the 0template directory, most of them are optional:
+* optional file activation
+  This file is run every time FreedomEV is activated. The USB stick looses power whenever the system goes to a certain sleep state. This file starts the required services as soon as FreedomEV becomes active again.
+* optional file deactivation
+  This file is run when FreedomEV detects that the USB stick containing the root filesystem is no longer there. At activation this script is copied to the not-chrooted /tmp/freedomev/deactivation-applicationname so it will still be available. Here we can kill processes which can't run properly anyway as their root filesystem is gone.
+* description.json
+  This file contains the full name of the application as how it will be displayed into the configuration screen. As well as a description, as well as the possibility to hide this application in the web interface. The 00core of FreedomEV provides the core functionality such as the configuration screen, this is uses the 'hidden' option, so it cannot be disabled by accident. Other apps might make use of it.
+* optional directories: everyminute, everyfiveminutes, everyhour, everyday and everymonth can contain executable scripts. They will be run at those time intervals. Suitable for most periodic tasks.
+
 
 Have fun!
 
