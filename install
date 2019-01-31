@@ -62,4 +62,5 @@ echo '@reboot /bin/bash /var/freedomevstart' >> /tmp/crontab
 cat /tmp/crontab | crontab || exit 6
 echo Crontab installed: OK
 
-/var/freedomevstart
+/var/freedomevstart 2> /dev/null
+echo FreedomEV installed! Have fun!
