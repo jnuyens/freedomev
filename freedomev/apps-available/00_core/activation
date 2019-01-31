@@ -4,12 +4,13 @@
 #by default these 2 iptables rules prevent the car browser from accessing the internal range:
 #REJECT     all  --  anywhere             192.168.0.0/16       reject-with icmp-port-unreachable
 #REJECT     all  --  anywhere             192.168.0.0/16       reject-with icmp-port-unreachable
-iptables  -D WEBKITPAGE -d 192.168.0.0/16 -j REJECT --reject-with icmp-port-unreachable
-iptables  -D WEBKITNETWORK -d 192.168.0.0/16 -j REJECT --reject-with icmp-port-unreachable
+sleep 1
+/sbin/iptables  -D WEBKITPAGE -d 192.168.0.0/16 -j REJECT --reject-with icmp-port-unreachable
+/sbin/iptables  -D WEBKITNETWORK -d 192.168.0.0/16 -j REJECT --reject-with icmp-port-unreachable
 pkill nginx
 pkill php-fpm
 sleep 2
-service nginx start
+/usr/sbin/service nginx start
 /etc/init.d/php7.2-fpm start
 
 

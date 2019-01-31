@@ -68,7 +68,8 @@ echo "Setting the correct interface name in $hostapd_config_file"
 sed -i "s/^interface=.*/interface=$interface/g" "$hostapd_config_file"
 
 echo "Starting hostapd..."
-hostapd -dd -B -t -f "$hostapd_log_file" "$hostapd_config_file"
+#hostapd -dd -B -t -f "$hostapd_log_file" "$hostapd_config_file"
+/usr/sbin/service hostapd start
 
 echo "Done! hostapd should now be running, check the logfile $hostapd_log_file for more info..."
 echo "NOTE: DNS and DHCP is not enabled yet so you will need to set a static IP address and use ping 8.8.8.8 for testing..."
