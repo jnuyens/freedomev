@@ -1,0 +1,4 @@
+{
+	"name": "Webmin",
+	"description": "Web based Linux System Administration tool to access a lot of functionality from the web browser. It uses the default root password located on the usb stick which is: freedomev. Access it at: <A HREF=https://localhost:10000>https://localhost:10000</a> or at <A HREF=https://192.168.90.100:10000>https://192.168.90.100:10000</a>"
+}
