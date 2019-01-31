@@ -154,7 +154,7 @@
       // Set timer to unlock
       setTimeout(function () {
         js_switch_lock = false;
-      }, 2000);
+      }, 600);
 
       // Do ajax call
       $.ajax({
