@@ -1,4 +1,4 @@
-# bootstrap version 2019013006
+# bootstrap version 2019013007
 # datestring needs to be at this position to verify if its the last version
 #
 # This script should be placed in /var/ and launched every minute out of cron
@@ -125,4 +125,4 @@ fi
 
 #launch the checks for freedomev core such as periodic check for version and periodic checks for certain apps
 export usbmountpoint freedomevversion
-/usr/sbin/chroot ${usbmountpoint} /bin/bash /freedomev/runperiodic
+/usr/sbin/chroot ${usbmountpoint} /bin/bash /freedomev/tools/runperiodic

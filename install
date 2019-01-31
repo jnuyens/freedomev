@@ -17,7 +17,7 @@ then
 	echo FreedomEV is already installed: installation aborted
 	exit 3
 fi
-echo Not yet installe: OK
+echo Not yet installed: OK
 
 #detecting if its a supported car
 hw_ap=$(cat /var/etc/dashw)
