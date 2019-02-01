@@ -1,0 +1,4 @@
+{
+	"name": "Moonshine Mode",
+	"description": "Make the display fade in and out of different colors. Accomplished by iterating over the X Server gamma correction values."
+}
