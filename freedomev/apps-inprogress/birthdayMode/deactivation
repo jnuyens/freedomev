@@ -1,0 +1,2 @@
+# when the USB stick is removed this script will run to possibly clean up
+# also when the app is deactivated in the web interface this script will run with root priviledges
