@@ -29,17 +29,9 @@ With root access, FreedomEV can be installed with one command:
 curl https://raw.githubusercontent.com/jnuyens/freedomev/master/install | sh
 
 ```
-A shorter URL is available too:
-```
-curl https://is.gd/zbzMEf | sh
-```
 To fully remove FreedomEV - this will remove the /var/freedomevstart and crontab entry run:
 ```
 curl https://raw.githubusercontent.com/jnuyens/freedomev/master/remove | sh
-```
-Or similar a shorter URL is available too:
-```
-curl https://is.gd/NLpzpr | sh
 ```
 
 Additionally a USB stick with the 'Ubuntu for NVIDIA Tegra' based image is necessary:
