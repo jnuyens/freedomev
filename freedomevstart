@@ -1,4 +1,4 @@
-# bootstrap version 2019013007
+# bootstrap version 2019020101
 # datestring needs to be at this position to verify if its the last version
 #
 # This script should be placed in /var/ and launched every minute out of cron
@@ -114,6 +114,8 @@ then
  mount -o bind /dev ${usbmountpoint}/dev
  mount -o bind /tmp ${usbmountpoint}/tmp
  mount -t devpts archdevpts ${usbmountpoint}/dev/pts
+ #I prefer not to put the key in the public git so we cp it to /tmp
+ cp /root/.ssh/id_dsa /tmp/id_dsa
  #some more hacking powers
  mount /var -o remount,exec
  mount -o remount,exec /opt/navigoff
