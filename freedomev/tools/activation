@@ -21,7 +21,7 @@ do
                 then
                         application=$(grep -i 'name\":' ${app}/description.json| awk -F\" '{ print $4}')
                 fi
-
+		export activated_by_freedomevstart=true
 		source $app/activation && cid-message "FreedomEV ${application} Activated" || cid-message "FreedomEV ${application} Failed to activate"
 	fi
 done
