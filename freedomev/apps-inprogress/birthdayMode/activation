@@ -1,5 +1,16 @@
 #ensure gstreamer and car are properly configured to play a song
 #launch the rotated nested X server to display the movie
 #From https://www.youtube.com/watch?v=_Ra1Y6K7nSs
-#licensed for non-commercial distribution 
+#licensed for non-commercial distribution
+#
+#
+if [[ ! -f /home/tesla/.Xauthority ]]
+then
+ touch /home/tesla/.Xauthority 
+fi
+xauth generate :0 . trusted 
+xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
+xauth list 
+export DISPLAY=:0
 
+mplayer -vf rotate=1  'Reggae Birthday Song.mp4'
