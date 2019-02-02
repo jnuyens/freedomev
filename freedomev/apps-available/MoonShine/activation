@@ -1,3 +1,4 @@
-ssh -i /tmp/freedomev/id_dsa root@ic 'bash -s' < /freedomev/apps/MoonShine/moonshine.sh &
-nohup /freedomev/apps/MoonShine/moonshine.sh &
+scp -i /tmp/freedomev/id_dsa /freedomev/apps/MoonShine/moonshine.sh root@ic:/var/moonshine.sh
+ssh -i /tmp/freedomev/id_dsa root@ic 'bash /var/moonshine.sh' &
+#nohup /freedomev/apps/MoonShine/moonshine.sh &
 
