@@ -80,7 +80,7 @@ fi
 freedomevversion=$(cat ${usbmountpoint}/etc/freedomevversion)
 if [[ ${freedomevversion} == "" ]]
 then
- echo no ${usbstickmountpoint}/etc/freedomevversion
+ echo no ${usbmountpoint}/etc/freedomevversion
  if ${freedomevstarted}
  then
   killandumount
