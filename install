@@ -29,7 +29,7 @@ hw_ap=$(cat /var/etc/dashw)
 # 4 is DAS3.0
 # /var/etc/dashw doesn't exist on Model 3
 case "$hw_ap" in 
-	 0 | 1 )
+	 0 | 1 | 3 )
 		 echo Detected DAS${hw_ap}, support for FreedomEV currently unconfirmed.
 		 echo Are you sure you want to continue?
 		 echo press y and enter to confirm or something else to abord.
