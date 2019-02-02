@@ -1,3 +1,4 @@
 - put the root pw inside the chroot environment to: freedomev, is only used by webmin for now.
 - run: apt-get clean all
+- rm /root/bash_history /home/tesla/bash_history
 
