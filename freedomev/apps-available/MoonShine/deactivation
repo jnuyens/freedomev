@@ -8,7 +8,7 @@ do
 done
 ssh -i /tmp/freedomev/id_dsa root@ic bash -s << EOF
  export DISPLAY=:0.0
- color in rgamma ggamma bgamma
+ for color in rgamma ggamma bgamma
  do
    xgamma -${color} 1.0 2> /dev/null
  done
