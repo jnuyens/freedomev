@@ -1,1 +1,35 @@
 https://github.com/jnuyens/raspap-webgui
+
+Current issues:
+1) Possibly the Tesla DNSMASQ needs to exclude the wlan0 device.
+Iptables rules need to be improved; this makes it work but is undesirable:
+
+
+iptables -I INPUT -j ACCEPT
+iptables -P INPUT ACCEPT  
+iptables -P FORWARD ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -A INPUT -i lo -j ACCEPT -m comment --comment "Allow all loopback traffic"
+iptables -A OUTPUT -j ACCEPT -m comment --comment "Accept all outgoing"
+iptables -A INPUT -j ACCEPT -m comment --comment "Accept all incoming"
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT -m comment --comment "Allow all incoming on established connections"
+
+iptables -t nat -A POSTROUTING -s 192.168.42.0/24 ! -d 192.168.42.0/24  -j MASQUERADE
+
+for device in wwan0 tun0 parrot toucan
+do 
+iptables -A FORWARD -i $device -j ACCEPT
+iptables -A FORWARD -o $device -j ACCEPT
+/sbin/iptables -A FORWARD -i $device -o wlan0 -m state  --state RELATED,ESTABLISHED -j ACCEPT
+done
+
+2) All connections work but strangely enough TLS Handshake errors. To currently bypass, setup SOCKS tunnel using ssh like described here:
+https://www.digitalocean.com/community/tutorials/how-to-route-web-traffic-securely-without-a-vpn-using-a-socks-tunnel
+
+So for example if your publicly reachable ssh server is jnuyens@freedomev.com, perform this on the client machine:
+ssh -D 8123 -f -C -q -N 
+and set the SOCKS proxy config to localhost and port 8123
+
+A more elegant solution will come soon.
+
+3) Traffic volume counting should be performed for the traffic going to LTE/3/4G ( and using the hotspot.
