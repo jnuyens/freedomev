@@ -32,7 +32,7 @@ case "$hw_ap" in
 	 0 | 1 | 3 )
 		 echo Detected DAS${hw_ap}, support for FreedomEV currently unconfirmed.
 		 echo Are you sure you want to continue?
-		 echo press y and enter to confirm or something else to abord.
+		 echo press y and enter to confirm or something else to abort.
 		 read feedback
 		 if [[ "$feedback" != "y" ]]
 			then
