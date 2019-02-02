@@ -8,8 +8,6 @@ echo "Are you sure to remove FreedomEV?"
 echo "This will remove /var/freedomevstart and the crontab entries"
 echo "Removing FreedomEV completely"
 echo 
-echo "Press Enter to continue or ctrl-c to abord"
-read
 echo Not running chrooted: OK
 
 #check if crontabs are there

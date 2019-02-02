@@ -29,10 +29,10 @@ hw_ap=$(cat /var/etc/dashw)
 # 4 is DAS3.0
 # /var/etc/dashw doesn't exist on Model 3
 case "$hw_ap" in 
-	 0 | 1 )
+	 0 | 3 )
 		 echo Detected DAS${hw_ap}, support for FreedomEV currently unconfirmed.
 		 echo Are you sure you want to continue?
-		 echo press y and enter to confirm or something else to abord.
+		 echo press y and enter to confirm or something else to abort.
 		 read feedback
 		 if [[ "$feedback" != "y" ]]
 			then
@@ -44,8 +44,8 @@ case "$hw_ap" in
 			echo If it does not behave as it should, use the remove script to clean up or just disable the crontab entry.
 		 fi
 		;;
-	2 )
-		echo Detected DAS2.0: OK
+	1 | 2 )
+		echo Detected DAS${hw_ap}.0: OK
 		;;
 	*) 
 		echo "You can try to help support FreedomEV on these Intel based cars, but it requires another Intel based Ubuntu rootfs and probably many other modifications. Aborting automatic installation."

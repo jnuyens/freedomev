@@ -1,5 +1,6 @@
 pkill moonshine.sh
 pkill -f 'ssh -i /tmp/freedomev/id_dsa root@ic bash -s'
+ssh -i /tmp/freedomev/id_dsa root@ic 'pkill -f moonshine.sh'
 export DISPLAY=:0.0
 color in rgamma ggamma bgamma
 do
@@ -7,7 +8,7 @@ do
 done
 ssh -i /tmp/freedomev/id_dsa root@ic bash -s << EOF
  export DISPLAY=:0.0
- color in rgamma ggamma bgamma
+ for color in rgamma ggamma bgamma
  do
    xgamma -${color} 1.0 2> /dev/null
  done
