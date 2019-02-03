@@ -40,10 +40,13 @@ Additionally a USB stick with the 'Ubuntu for NVIDIA Tegra' based image is neces
 ## Installation - easy way: prepare a USB stick from a Linux desktop system
 You need a USB stick to insert into the car - best 16 or 32GB, formatted as ext4.
 Download and extract the latest image tarball on it as the root user (so the permissions and special files are correct).
+Download here: https://www.freedomev.com/FreedomEV-1.0-usbstickimage-extract-to-an-ext4-filesystem.tgz
 If you mounted the stick to /mnt/stick:
 ```
 cd /mnt/stick
-tar xvf ~/Downloads/freedomev-1.0.xz
+tar xvf ~/Downloads/FreedomEV-1.0-usbstickimage-extract-to-an-ext4-filesystem.tgz
+mv freedomev-1.0-rootfs/* .
+mv freedomev-1.0-rootfs/.git .
 sync
 cd 
 umount /mnt/stick
@@ -52,7 +55,7 @@ It depends on the speed of your USB stick if this will take a while.
 Insert the USB stick into the car, it will hopefully be mounted on a subdirectory of /disk/
 Go into the chrooted environment:
 ```
-bash /disk/*/freedomev/chroot
+chroot /disk/usb.*/
 ```
 Update to the latest version of FreedomEV (execute in chroot on the stick / directory):
 ```
