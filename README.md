@@ -4,7 +4,7 @@ Getting ready to support Model S and X with ARM based MCU.
 
 Newer Model S and X and Model 3 have an Intel based MCU, porting should be doable; other location for persistent launch and storage might be needed as well as other adjustments. If you have root on such a car and would like to explore, contact us. Similar for other Electric Vehicles with Linux running on them.
 
-# Working towards FOSDEM launch next sunday!
+# Launched!
 
 Official FOSDEM 2019 link: https://fosdem.org/2019/schedule/event/tesla_hacking/
 
