@@ -18,9 +18,9 @@
     <title>FreedomEV</title>
 
     <script src="js/jquery.min.js"></script>
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
     <script src="js/bootstrap.min.js"></script>
-    <link href="fa/css/all.min.css" rel="stylesheet"/>
+    <link href="fa/css/all.min.css" rel="stylesheet" />
     <script src="fa/js/fontawesome.js"></script>
     <link href="css/switchery.min.css" rel="stylesheet" />
     <script src="js/switchery.min.js"></script>
@@ -140,21 +140,21 @@
     $(".js-switch").on("change", function (ev) {
 //      console.log("lock:", js_switch_lock);
 
-      if (js_switch_lock) {
+//      if (js_switch_lock) {
 //        console.log("Ignoring change event");
-        return;
-      }
+//        return;
+//      }
 
       // Set a lock
-      js_switch_lock = true;
+//      js_switch_lock = true;
 
       // Make spinner visible
       $("#" + ev.currentTarget.id + "~ i").removeClass("d-none");
 
       // Set timer to unlock
-      setTimeout(function () {
-        js_switch_lock = false;
-      }, 600);
+//      setTimeout(function () {
+//        js_switch_lock = false;
+//      }, 600);
 
       // Do ajax call
       $.ajax({
