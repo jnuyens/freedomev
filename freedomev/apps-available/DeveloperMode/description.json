@@ -1,4 +1,4 @@
 {
 	"name": "Developer and Factory Mode",
-	"description": "Enable the Tesla made Developer and Factory Mode to display many internal statistics including battery pack healh status. The display application will restart."
+	"description": "Enable the Tesla made Developer to display many internal statistics including battery pack healh status. The display application will restart."
 }
