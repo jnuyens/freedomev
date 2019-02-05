@@ -116,3 +116,6 @@ Have fun!
 Email me for questions/additions. Pull requests welcome.
 jasper at linux.com
 
+Interesting related projects:
+http://github.com/lunars/tesla
+
