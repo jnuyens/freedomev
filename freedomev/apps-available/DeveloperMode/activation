@@ -4,14 +4,12 @@ then
  #dont do anything, we only need to enable it when enabled in the
  #web interface
  developerMode=$(lvs | grep GUI_developerMode | awk -F, '{ print $2 }') 
- factoryMode=$(lvs | grep GUI_factoryMode| awk -F, '{ print $2 }') 
- if [[ ${developerMode} == "false" && ${factoryMode}=="false" ]]
+ if [[ ${developerMode} == "false" ]]
  then
    #disable Mode after 'reboot to disable has been chosen'
    rm /freedomev/apps/DeveloperMode
  fi
  else
-  curl -s "http://192.168.90.100:4035/set_data_value?name=GUI_factoryMode&value=true"
   curl -s "http://192.168.90.100:4035/set_data_value?name=GUI_developerMode&value=true"
   /freedomev/tools/cid-message "The display will restart to enable Developer and Factory Mode"
 fi
