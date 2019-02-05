@@ -113,4 +113,6 @@ These are the files and directories in the 0template directory, most of them are
 
 
 Have fun!
+Email me for questions/additions. Pull requests welcome.
+jasper at linux.com
 
