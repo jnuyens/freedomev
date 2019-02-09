@@ -125,18 +125,10 @@ We hope that Tesla will give car owners officially root access to their cars if 
 Until this happens, people with access to the 'Tesla Toolbox' might be able to give root command line access. Desoldering the eMMC also is a possibility, but I imagine this voids the warranty of that component. 
 
 * What about insurance?
-When you are making modifications to the drive train, or modify your car so it's value increases, you should report it to insurance. These requirements are different between countries. But car modification, modding or tuning exists already for a long time. Advise for your specific region/state/country is certainly available online.
+When you are making modifications to the drive train, or modify your car so it's value increases, you should report it to insurance. These requirements are different between countries. But car modification, modding or tuning exists already for a long time. Advise for your specific region/state/country is certainly available online. It is typically focused on things which do matter with respect to safety: changing the suspension, making the car more powerful and things like that. An insurance can't claim that the cause of an accident is because of an unrelated issue. Also, these cars are build to ensure that even a reboot will not interfere with its safe operation. That being said, insurance companies are not know for being reasonable everywhere. And this FreedomEV project is made specifically so it can be easily enabled and disabled. So you could - for example - insert the USB stick when parked at a Supercharger to enable Hotspot Mode. Of watch movies (when that feature gets added). Watching movies in a car is illegal in most countries unless the car is parked. If the car is parked or not can be easily checked by the software, so if you add this functionality, add the required checks. Cars where never before in scope for us as OpenSource enthousiasts, glad this is finally changing!
 
-It is typically focused on things which DO MATTER with respect to safety: changing the suspension, making the car more powerful and things like that. An insurance can't claim that the cause of an accident is because of an unrelated issue. Also, these cars are build to ensure that even a reboot will not interfere with its safe operation.
-
-That being said, insurance companies are not know for being reasonable everywhere. And this FreedomEV project is made specifically so it can be easily enabled and disabled. So you could - for example - insert the USB stick when parked at a Supercharger to enable Hotspot Mode. Of watch movies (when that feature gets added). Watching movies in a car is illegal in most countries unless the car is parked. If the car is parked or not can be easily checked by the software, so if you add this functionality, add the required checks.
-
-Cars where never before in scope for us as OpenSource enthousiasts, glad this is finally changing!
-
-
-Have fun!
-Email me for questions/additions. Pull requests welcome.
-jasper at linux.com
+* How to contact you?
+Email me for questions/additions. Pull requests welcome: jasper at linux.com
 
 Interesting related projects:
 http://github.com/lunars/tesla
