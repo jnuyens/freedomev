@@ -120,6 +120,9 @@ These are the files and directories in the 0template directory, most of them are
 
 # Frequently Asked Questions
 
+* Is this like rooting a phone?
+Not really, when rooting a phone, all software components are replaced with an alternative Linux kernel, device drivers and root filesystem. In this case, all software remains the same, including the kernel and root filesystem. An Ubuntu NVIDIA ARM root filesystem is added, not used as a replacement. From it, additional software is started to run on the original Tesla Linux kernel. These processes add additional functionality and the configuration web interface - do not take up too much CPU or RAM. In this way we ensure they don't interfere with proper working of the original software components. 
+
 * How to get root?
 We hope that Tesla will give car owners officially root access to their cars if they register as 'security researchers'. As you are part of the OpenSource community, and use and extend this software, you might discover a bug or design mistake in one of the Tesla provided software components. Such a bug can have a security implication, and when this is reported to Tesla, they can pay you a 'bug bounty'. Tesla has fixed issues like this in the past immediately ensuring everybody their cars become safer.
 Until this happens, people with access to the 'Tesla Toolbox' might be able to give root command line access. Desoldering the eMMC also is a possibility, but I imagine this voids the warranty of that component. 
