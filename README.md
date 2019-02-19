@@ -3,6 +3,8 @@ Full launch presentation:
 
 https://www.youtube.com/embed/k7jbERL-Jd0
 
+**Upgrading to 2019.2 or higher is not yet supported, we are evaluating our options**
+
 Or look at the **FAQ** below.
 
 FreedomEV repository. Unlocking the full potential of Linux on your Electric Vehicle!
