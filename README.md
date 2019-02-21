@@ -1,4 +1,4 @@
-# FreedomEV
+# FreedomEV - a safe way to enhance your car for Linux geeks
 Full launch presentation: 
 
 https://www.youtube.com/embed/k7jbERL-Jd0
