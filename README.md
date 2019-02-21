@@ -129,6 +129,10 @@ Not really, when rooting a phone, all software components are replaced with an a
 We hope that Tesla will give car owners officially root access to their cars if they register as 'security researchers'. As you are part of the OpenSource community, and use and extend this software, you might discover a bug or design mistake in one of the Tesla provided software components. Such a bug can have a security implication, and when this is reported to Tesla, they can pay you a 'bug bounty'. Tesla has fixed issues like this in the past immediately ensuring everybody their cars become safer.
 Until this happens, people with access to the 'Tesla Toolbox' might be able to give root command line access. Desoldering the eMMC also is a possibility, but I imagine this voids the warranty of that component. 
 
+
+* Is this for the general public?
+While the functions in FreedomEV might appeal to everybody, we still consider FreedomEV in its current form, something for thinkerers and 'Linux geeks' or 'Linux Hackers', people who know the operating systems on which the car is running very well. Maybe in the future there will be releases geared at the general public if there's a solution to enable this on all cars, maybe it remains a testbed to try out new things quickly and see what works nice and what's fun. 
+
 * Will this void my car warranty?
 We don't believe so. In any case, we are only making a very small change to the central display to be able to work with the software on the USB stick. During this process, we opened up the car multiple times. Tesla was very helpful and understanding in this process. When I broke off a plastic part, I didn't claim warranty on it and for the extra work I proposed to pay for it. Tesla didn't even charge me for the extra work. Warranty on the other components of the car should not be affected at all.
 
