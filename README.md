@@ -35,7 +35,7 @@ _for now_ as they use an Intel based board instead of the ARM based Linux system
 Model 3 cars are even better closed down and harder to root. Tesla gives high bug bounties for those people finding root exploits and/or persistence across reboots; thus ensuring everybody their cars are safer. These tools and FreedomEV can help security researchers to better analyse and find potential problems.
 With root access, FreedomEV can be installed with one command:
 ```
-curl https://raw.githubusercontent.com/jnuyens/freedomev/master/install | bash
+curl https://raw.githubusercontent.com/jnuyens/freedomev/master/install > install && bash install
 
 ```
 To fully remove FreedomEV - this will remove the /var/freedomevstart and crontab entry run:
