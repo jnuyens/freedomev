@@ -2,7 +2,7 @@
 
 function log_info() {
   #uncomment for debugging
-  #echo $1
+  #logger $1
   #curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="$1"
 }
 
@@ -42,7 +42,7 @@ do
   else
     if [ "$CURRENT_SPEED" -ne "$INIT_SPEED" ]
     then
-      # every 10km/h increases volume by 0.333.
+      # every additional 10 miles/h increases volume by 0.333.
       NEW_VOLUME=$(( INIT_VOLUME + (INCREMENT * ((CURRENT_SPEED - INIT_SPEED) / 10000) ) ))
       log_info "NEW_VOLUME ${NEW_VOLUME}"
       if [ "$NEW_VOLUME" -le "$MAX_VOLUME" ] && [ "$NEW_VOLUME" -gt "$MIN_VOLUME" ]
