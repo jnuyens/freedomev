@@ -1,0 +1,4 @@
+{
+	"name": "Storage Knight eMMC protection",
+	"description": "Mounts a tmpfs RAM filesystem over /var/log so log information doesn't consume our precious limited erase cycles - this increases the lifetime of the eMMC storage of the Central Information Display (CID) and Instrument Cluster behind the steering wheel (IC). If you need Tesla Service to remotely troubleshoot this car, turn this feature off first. Other people say we implemented this feature with the help of storage Knights who say: 'Ni!' at all attempts to kill the eMMC prematurely."
+}

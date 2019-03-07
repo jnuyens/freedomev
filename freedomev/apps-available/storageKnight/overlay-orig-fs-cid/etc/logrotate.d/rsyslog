@@ -1,0 +1,40 @@
+/var/log/syslog
+/var/log/syslog.err
+/var/log/user.log
+/var/log/user.err
+/var/log/messages
+/var/log/lpr.log
+/var/log/auth.log
+/var/log/iptables.log
+{
+        rotate 14
+        hourly
+        missingok
+        notifempty
+        compress
+        postrotate
+                restart rsyslog >/dev/null 2>&1 || true
+        endscript
+}
+
+/var/log/mail.info
+/var/log/mail.warn
+/var/log/mail.err
+/var/log/mail.log
+/var/log/daemon.log
+/var/log/kern.log
+/var/log/cron.log
+/var/log/debug
+{
+        rotate 4
+        hourly
+        missingok
+        notifempty
+        compress
+        delaycompress
+        sharedscripts
+        postrotate
+                restart rsyslog >/dev/null 2>&1 || true
+        endscript
+}
+

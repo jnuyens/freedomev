@@ -1,0 +1,31 @@
+#an example of a constructive way to use tmpfs
+#as many end users report broken eMMC we can drastically reduce the amount of erase cycles
+#in certain cases we might loose log information (Linux kernel crash due to eMMC, RAM or power supply issues)
+#we find it an acceptable tradeoff as we copy the logfiles to the real /var prior to a reboot
+#and tell users to disable this functionality prior to remote analysis by Tesla Service
+#
+#Hope it makes the cars more futureproof - if someone at Tesla reads this, feel free to recycle this into a future
+#so all users can enjoy it. Probably a good idea to use a variable to check at startup if you want this enabled or
+#not, so that it can be disabled for better remote troubleshooting. And while your at it, reduce the amount of 
+#logging being kept as it will fill up precious RAM or /var space. Thanks, you are doing great work!
+
+mount -t tmpfs -o size=1500k,nr_inodes=200 tmpfs /var/log
+#if we mount while the programs are still active and they keep their logfiles open, they keep on writing to the
+#(now hidden) location on the eMMC, so we need to restart or send the HUP signal (if it's properly impemented)
+mkdir /var/log/ntpstats /var/log/mgetty
+service ntp restart
+pkill -HUP valhalla_server
+restart rsyslog
+#we dont restart X wich will keep logging to Xorg.0.log on the /var/log eMMC location.
+#as it would be a bad fix for this problem. In any case X doesnt log a lot afer startup
+#and it would be just be better to mount tmpfs prior to launching any of this
+#if we start freedomev earlier in the boot process (which might be forced upon us by Tesla 'fixing' things)
+#we can add this at the appropriate location (please Tesla don't be motivated to make our life more difficult,
+#the solution will become less elegant over time otherwise).
+
+#on the ic
+ssh ic mount -t tmpfs -o size=1500k,nr_inodes=200 tmpfs /var/log
+ssh ic mkdir /var/log/ntpstats /var/log/mgetty
+ssh ic service ntp restart 
+ssh ic restart rsyslog 
+#improved logrotation

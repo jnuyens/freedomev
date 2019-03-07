@@ -1,0 +1,8 @@
+/var/log/cellstats
+{
+  rotate 7
+  hourly
+  compress
+  missingok
+  notifempty
+}

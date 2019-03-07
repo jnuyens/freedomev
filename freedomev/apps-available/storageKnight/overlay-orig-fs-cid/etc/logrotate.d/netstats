@@ -1,0 +1,10 @@
+/var/log/netstats
+{
+    rotate 7
+   hourly 
+    missingok
+    notifempty
+    delaycompress
+    compress
+    copytruncate
+}

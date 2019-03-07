@@ -1,0 +1,27 @@
+#script called by /var/freedomevstart from the car
+#runs outside the chrooted usb stick for filesystem operations on the car
+#please be careful
+
+export LC_ALL=C
+source /etc/tesla.env
+source ${usbmountpoint}/freedomev/tools/freedomev.env
+
+for app in /freedomev/apps/*
+do
+	application=$(echo ${app} | awk -F\/ '{ print $4 }')
+	if [ -f ${app}/activation-outside-chroot ]
+	then
+		if [[ -f ${app}/deactivation ]]
+		then
+			mkdir /tmp/freedomev 2>/dev/null
+			cp ${app}/deactivation /tmp/freedomev/$application-deactivation
+		fi
+                if [[ -f ${app}/description.json ]]
+                then
+                        application=$(grep -i 'name\":' ${app}/description.json| awk -F\" '{ print $4}')
+                fi
+		export activated_by_freedomevstart=true
+		source $app/activation && cid-message "FreedomEV ${application} Activated" || cid-message "FreedomEV ${application} Failed to activate"
+	fi
+done
+

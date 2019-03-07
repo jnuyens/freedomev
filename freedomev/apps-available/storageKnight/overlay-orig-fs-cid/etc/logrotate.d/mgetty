@@ -1,0 +1,9 @@
+/var/log/mgetty/*.log {
+	hourly
+	rotate 7
+	create 640 root adm
+	compress
+	delaycompress
+	notifempty
+	missingok
+}

@@ -4,6 +4,7 @@ function log_info() {
   #uncomment for debugging
   #logger $1
   #curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="$1"
+  :
 }
 
 function get_value() {
@@ -50,11 +51,12 @@ do
         NEW_VOLUME_FORMATTED=`printf %04d ${NEW_VOLUME} | sed ':a;s/\B[0-9]\{3\}\>/.&/;ta'`
         log_info "NEW_VOLUME_FORMATTED ${NEW_VOLUME_FORMATTED}"
         curl -s "http://192.168.90.100:4035/set_data_value?name=GUI_audioVolume&value=${NEW_VOLUME_FORMATTED}"
+	/freedomev/tools/cid-message "NewVolume=${NEW_VOLUME_FORMATTED}"
         PREV_VOLUME=${NEW_VOLUME}
       fi
     fi
   fi
-  /bin/sleep 1
+  /bin/sleep 3
 
 done
 

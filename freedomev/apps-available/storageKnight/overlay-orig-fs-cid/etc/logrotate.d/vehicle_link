@@ -1,0 +1,8 @@
+/var/log/vehicle_link.log
+{
+  rotate 7
+  hourly 
+  compress
+  missingok
+  notifempty
+}

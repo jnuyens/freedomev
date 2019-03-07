@@ -1,0 +1,11 @@
+/var/log/ulogd.log
+{
+    rotate 5
+    hourly
+    missingok
+    notifempty
+    delaycompress
+    compress
+    copytruncate
+}
+

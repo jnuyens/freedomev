@@ -1,0 +1,10 @@
+/var/log/fsck.home.log
+/var/log/fsck.var.log
+/var/log/fsck.*.log
+{
+  rotate 7
+  hourly
+  compress
+  missingok
+  notifempty
+}

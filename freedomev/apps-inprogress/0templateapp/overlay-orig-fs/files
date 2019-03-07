@@ -1,0 +1,4 @@
+#these files will be bind mounted over the original files of the root filesystem
+#be careful to not break stuff
+#the overlay will be applied prior to running the activation-outside-chroot-jail and activation scripts
+#the files will be umounted upon deactivation 

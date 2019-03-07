@@ -1,0 +1,14 @@
+
+#!/bin/sh
+
+test -x /usr/sbin/logrotate || exit 0
+
+# SW-23279: if we have a bogus logrotate status file (i.e. has dates
+# like 1969 in it), clean it up.
+if [ -e /var/lib/logrotate/status ] && egrep '19..-' /var/lib/logrotate/status ; then
+    rm -f /var/lib/logrotate/status
+    /usr/sbin/logrotate -f /etc/logrotate.conf
+else
+    /usr/sbin/logrotate /etc/logrotate.conf
+fi
+

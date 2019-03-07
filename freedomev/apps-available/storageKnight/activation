@@ -1,0 +1,5 @@
+#when the USB stick is rediscovered this script will run again to possibly clean up
+#previous process leftovers and relaunch whatever processes need to be launched
+#activated_by_freedomevstart=true when the activation script is launched by freedomevstart
+#it is not set when launched because the app is enabled
+

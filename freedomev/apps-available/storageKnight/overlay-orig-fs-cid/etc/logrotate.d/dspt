@@ -1,0 +1,9 @@
+/var/log/dspt.log
+{
+  rotate 7
+  hourly
+  compress
+  missingok
+  notifempty
+}
+
