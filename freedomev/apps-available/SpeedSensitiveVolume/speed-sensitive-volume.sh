@@ -4,6 +4,8 @@ function log_info() {
   #uncomment for debugging
   #logger $1
   #curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="$1"
+  #I prefer multi line possibility with: 
+  #/freedomev/tools/cid-message "$1"
   #only commentary is not allowed
   :
 }
