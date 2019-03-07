@@ -2,5 +2,6 @@ nohup.out
 .bash_history
 id_rsa.pub
 id_rsa
+*.swp
 /freedomev/apps/*
 !/freedomev/apps/00_core
