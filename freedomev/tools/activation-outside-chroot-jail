@@ -9,9 +9,9 @@ source ${usbmountpoint}/freedomev/tools/freedomev.env
 for app in ${usbmountpoint}/freedomev/apps/*
 do
 	application=$(echo ${app} | awk -F\/ '{ print $6 }')
-	if [ -f ${app}/activation-outside-chroot ]
+	if [ -f ${app}/activation-outside-chroot-jail ]
 	then
-		bash ${app}/activation-outside-chroot	
+		bash ${app}/activation-outside-chroot-jail
 		if [[ -f ${app}/deactivation ]]
 		then
 			mkdir /tmp/freedomev 2>/dev/null
