@@ -6,22 +6,17 @@ export LC_ALL=C
 source /etc/tesla.env
 source ${usbmountpoint}/freedomev/tools/freedomev.env
 
-for app in /freedomev/apps/*
+for app in ${usbmountpoint}/freedomev/apps/*
 do
-	application=$(echo ${app} | awk -F\/ '{ print $4 }')
+	application=$(echo ${app} | awk -F\/ '{ print $6 }')
 	if [ -f ${app}/activation-outside-chroot ]
 	then
+		bash ${app}/activation-outside-chroot	
 		if [[ -f ${app}/deactivation ]]
 		then
 			mkdir /tmp/freedomev 2>/dev/null
 			cp ${app}/deactivation /tmp/freedomev/$application-deactivation
 		fi
-                if [[ -f ${app}/description.json ]]
-                then
-                        application=$(grep -i 'name\":' ${app}/description.json| awk -F\" '{ print $4}')
-                fi
-		export activated_by_freedomevstart=true
-		source $app/activation && cid-message "FreedomEV ${application} Activated" || cid-message "FreedomEV ${application} Failed to activate"
 	fi
 done
 

@@ -9,6 +9,8 @@
 #not, so that it can be disabled for better remote troubleshooting. And while your at it, reduce the amount of 
 #logging being kept as it will fill up precious RAM or /var space. Thanks, you are doing great work!
 
+#minimal size - we need to perform very good logrotate to deal with that 
+#
 mount -t tmpfs -o size=1500k,nr_inodes=200 tmpfs /var/log
 #if we mount while the programs are still active and they keep their logfiles open, they keep on writing to the
 #(now hidden) location on the eMMC, so we need to restart or send the HUP signal (if it's properly impemented)

@@ -1,0 +1,3 @@
+spaceoncid=$(df -h /var/log)
+/freedomev/tools/cid-message "CID /var/log: $spaceoncid"
+
