@@ -55,6 +55,7 @@ do
       fi
     fi
   fi
+  #a 3 second delay seems acceptable and means less cpu overhead due to polling
   /bin/sleep 3
 
 done
