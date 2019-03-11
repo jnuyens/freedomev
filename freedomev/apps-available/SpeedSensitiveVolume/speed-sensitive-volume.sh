@@ -14,9 +14,9 @@ function get_value() {
   #too slow. loads all the properties for single value.
   #VALUE=$(lvs | grep $1, | awk -F, '{ print $2 }' | tr -d '.' | tr '@invalid' '0')
 
-  #faster, but requires php. TODO implement bash version.
-  RESPONSE=`curl -s "http://localhost:4035/Debug/get_data_value?valueName=$1"`
-  VALUE=$(php -r "echo json_decode('$RESPONSE', 1)['value'];" | tr -d '.' | tr '<invalid>' '0')
+  #bash version.
+  VALUE=`curl -s "http://localhost:4035/Debug/get_data_value?valueName=$1" | awk -F\" '{ print $6 }' | tr -d '.' | tr '<invalid>' '0'`
+  #VALUE=$(php -r "echo json_decode('$RESPONSE', 1)['value'];" | tr -d '.' | tr '<invalid>' '0')
 
   echo $((10#$VALUE))
 }
