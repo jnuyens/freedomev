@@ -53,15 +53,20 @@ If you mounted the stick to /mnt/stick:
 ```
 cd /mnt/stick
 tar xvf ~/Downloads/FreedomEV-1.0-usbstickimage-extract-to-an-ext4-filesystem.tgz
-mv freedomev-1.0-rootfs/* .
-mv freedomev-1.0-rootfs/.git .
+mv freedomev-1.0-rootfs/freedomev-1.0/* .
+mv freedomev-1.0-rootfs/freedomev-1.0/.git .
 sync
 cd 
 umount /mnt/stick
 ```
 It depends on the speed of your USB stick if this will take a while.
-Insert the USB stick into the car, it will hopefully be mounted on a subdirectory of /disk/
-Go into the chrooted environment:
+Insert the USB stick into the car, `/dev/sda1` should become mounted on a subdirectory of `/disk/`. Check with the `mount` command to confirm whether it's indeed `/dev/sda1`.
+You will need to remount this to allow the chroot to work, as follows:
+```
+mount -o remount,exec,dev /dev/sda1
+```
+
+Next, go into the chrooted environment:
 ```
 chroot /disk/usb.*/
 ```
