@@ -63,6 +63,7 @@ It depends on the speed of your USB stick if this will take a while.
 Insert the USB stick into the car, it will hopefully be mounted on a subdirectory of /disk/
 Go into the chrooted environment:
 ```
+bash /disk/usb.*/freedomevstart
 chroot /disk/usb.*/
 ```
 Update to the latest version of FreedomEV (execute in chroot on the stick / directory):
