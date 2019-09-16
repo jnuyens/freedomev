@@ -16,9 +16,6 @@ Newer Model S and X and Model 3 have an Intel based MCU, porting should be doabl
 
 Official FOSDEM 2019 link: https://fosdem.org/2019/schedule/event/tesla_hacking/
 
-# Wiki
-FreedomEV wiki also contains a lot of information: https://www.freedomev.com/wiki
-
 ### Disclaimer
 This is not made by Tesla Inc., nor officially endorsed (just yet?). We take no responsibility whatsoever for damage, costs, injury or even death caused by this to you or third parties. In certain territories, it might violate local regulations, we don't know about that, and we don't care. We hope FreedomEV will enjoy your car even more.
 I am tell my Tesla Service Center about what we are doing here. When the car is serviced, I disable all strange stuff so they might not become too confused (unless they ask for it). Tesla car service people have instructions to remove all visible USB attached stuff to not interfere with possible updates, which is a good thing. Also, I don't claim warranty on stuff I broke myself, Tesla has been very reasonable with respect to that. 
