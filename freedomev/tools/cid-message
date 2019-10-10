@@ -8,6 +8,9 @@ fi
 
 message=$1
 
+#mute messages if configured like that
+[ -e /freedomev/apps/mute_messages ] && exit 0
+
 #if more than 74 chars, cutting will occur.
 while [[ $( echo "$message" | wc -c) -gt 78 ]]
 do
