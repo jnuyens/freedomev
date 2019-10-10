@@ -3,12 +3,14 @@ Full launch presentation:
 
 https://www.youtube.com/embed/k7jbERL-Jd0
 
-**Upgrading to 2019.4 or higher is not yet supported, we are evaluating our options**
+**Upgrading to 2019.4 or higher needs additional work to get cron working **
 
 Or look at the **FAQ** below.
 
 FreedomEV repository. Unlocking the full potential of Linux on your Electric Vehicle!
-Getting ready to support Model S and X with ARM based MCU.
+
+## Currently Supported Cars
+Getting ready to support Model S and X with ARM based MCU (aka MCU1).
 
 Newer Model S and X and Model 3 have an Intel based MCU, porting should be doable; other location for persistent launch and storage might be needed as well as other adjustments. If you have root on such a car and would like to explore, contact us. Similar for other Electric Vehicles with Linux running on them.
 
