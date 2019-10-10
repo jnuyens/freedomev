@@ -1,0 +1,6 @@
+1.1 Release 11 oktober 2019
+Bumped version, small bugfixes, added locking and unlocking of ethernet service port, speed sensitive music volume, 
+still working on eMMCGuard to protect the eMMC by writing the logfiles of the cid and ic to tmpfs instead of eMMC.
+
+1.0 Release 1st of februari 2019
+Yeeeij!
