@@ -1,0 +1,2 @@
+iptables -w 5 -R SECETH 1 -j SECETH_LOCKED
+printf "\x00\x00\x00\x18%b\x00"  | socat -u - udp-sendto:gw:20100

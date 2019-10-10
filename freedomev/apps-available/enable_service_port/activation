@@ -1,0 +1,4 @@
+pkill seceth
+iptables -w 5 -R SECETH 1 -j ACCEPT
+printf "\x00\x00\x00\x18%b\x01" | socat -u - udp-sendto:gw:20100
+
