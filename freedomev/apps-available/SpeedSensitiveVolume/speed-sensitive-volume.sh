@@ -1,65 +1,53 @@
 #!/bin/bash
 
-function log_info() {
-  #uncomment for debugging
-  #logger $1
-  #curl -G -m 5 -f http://192.168.90.100:4070/display_message -d color=foregroundColor --data-urlencode message="$1"
-  #I prefer multi line possibility with: 
-  #/freedomev/tools/cid-message "$1"
-  #only commentary is not allowed
-  :
+# minimum miles/h at which volume will start to auto adjust
+MIN_SPEED=10
+# step size in miles/h at which volume adjusts by $VOLUME_INCREMENT (8 for example will cause volume to adjust up/down every 8 mph)
+VOLUME_SPEED_STEP=8
+# amount of volume that will increase or decrease per $VOLUME_SPEED_STEP - integer value (x10000) since bash doesn't support floating point calculations
+# tesla default is 0.333 per scroll (GUI_audioVolumeIncrement). we use half that (x10000) to make auto volume adjustments smooth
+VOLUME_INCREMENT=1665
+
+# ------------
+
+get_volume_int() {
+  lv GUI_audioVolume | awk -F\" '{ printf "%d", $2 * 10000 }'
+}
+get_speed_int() {
+  lv VAPI_vehicleSpeed | awk -F\" '{ printf "%d", $2 }'
 }
 
-function get_value() {
-  #too slow. loads all the properties for single value.
-  #VALUE=$(lvs | grep $1, | awk -F, '{ print $2 }' | tr -d '.' | tr '@invalid' '0')
+INIT_VOLUME=$(get_volume_int)
+PREV_VOLUME=$INIT_VOLUME
+INIT_SPEED=$(get_speed_int)
+PREV_SPEED=$INIT_SPEED
 
-  #bash version.
-  VALUE=`curl -s "http://localhost:4035/Debug/get_data_value?valueName=$1" | awk -F\" '{ print $6 }' | tr -d '.' | tr '<invalid>' '0'`
-  #VALUE=$(php -r "echo json_decode('$RESPONSE', 1)['value'];" | tr -d '.' | tr '<invalid>' '0')
-
-  echo $((10#$VALUE))
-}
-
-MIN_VOLUME=0
-MAX_VOLUME=$(get_value GUI_audioVolumeMax)
-INCREMENT=$(get_value GUI_audioVolumeIncrement)
-log_info "MAX_VOLUME ${MAX_VOLUME} MIN_VOLUME ${MIN_VOLUME} INCREMENT ${INCREMENT}"
-
-INIT_SPEED=$(get_value VAPI_vehicleSpeed)
-INIT_VOLUME=$(get_value GUI_audioVolume)
-PREV_VOLUME=${INIT_VOLUME}
-log_info "INIT_VOLUME ${INIT_VOLUME} INIT_SPEED ${INIT_SPEED}" 
-
-while [ 1 -eq 1 ]
-do
-  CURRENT_SPEED=$(get_value VAPI_vehicleSpeed)
-  CURRENT_VOLUME=$(get_value GUI_audioVolume)
-  log_info "CURRENT_VOLUME ${CURRENT_VOLUME} CURRENT_SPEED ${CURRENT_SPEED}"
-
-  if [ "$PREV_VOLUME" -ne "$CURRENT_VOLUME" ]
-  then
-    INIT_VOLUME=${CURRENT_VOLUME}
-    PREV_VOLUME=${CURRENT_VOLUME}
-    INIT_SPEED=${CURRENT_SPEED}
-    log_info "INIT_VOLUME ${INIT_VOLUME} INIT_SPEED ${INIT_SPEED}" 
-  else
-    if [ "$CURRENT_SPEED" -ne "$INIT_SPEED" ]
-    then
-      # every additional 10 miles/h increases volume by 0.333.
-      NEW_VOLUME=$(( INIT_VOLUME + (INCREMENT * ((CURRENT_SPEED - INIT_SPEED) / 10000) ) ))
-      log_info "NEW_VOLUME ${NEW_VOLUME}"
-      if [ "$NEW_VOLUME" -le "$MAX_VOLUME" ] && [ "$NEW_VOLUME" -gt "$MIN_VOLUME" ]
-      then
-        NEW_VOLUME_FORMATTED=`printf %04d ${NEW_VOLUME} | sed ':a;s/\B[0-9]\{3\}\>/.&/;ta'`
-        log_info "NEW_VOLUME_FORMATTED ${NEW_VOLUME_FORMATTED}"
-        curl -s "http://192.168.90.100:4035/set_data_value?name=GUI_audioVolume&value=${NEW_VOLUME_FORMATTED}"
-        PREV_VOLUME=${NEW_VOLUME}
+while true; do
+  CURRENT_VOLUME=$(get_volume_int)
+  CURRENT_SPEED=$(get_speed_int)
+  if (( PREV_VOLUME != CURRENT_VOLUME )); then
+    INIT_VOLUME=$CURRENT_VOLUME
+    PREV_VOLUME=$INIT_VOLUME
+    INIT_SPEED=$CURRENT_SPEED
+    PREV_SPEED=$INIT_SPEED
+  elif (( CURRENT_VOLUME > 0 && (CURRENT_SPEED > MIN_SPEED || PREV_SPEED >= MIN_SPEED) )); then
+    SPEED_DIFF=$((CURRENT_SPEED - PREV_SPEED))
+    # avoid volume adjustments while driving at somewhat constant speed and minimize sdv calls
+    if (( SPEED_DIFF > 3 || SPEED_DIFF < -3 )); then
+      OFFSET_CURRENT_SPEED=$(( CURRENT_SPEED > MIN_SPEED ? CURRENT_SPEED - MIN_SPEED : 0 ))
+      OFFSET_INIT_SPEED=$(( INIT_SPEED > MIN_SPEED ? INIT_SPEED - MIN_SPEED : 0 ))
+      NEW_VOLUME=$(( INIT_VOLUME + (VOLUME_INCREMENT * ((OFFSET_CURRENT_SPEED - OFFSET_INIT_SPEED) / VOLUME_SPEED_STEP)) ))
+      if (( NEW_VOLUME <= 0 )); then
+        NEW_VOLUME=$VOLUME_INCREMENT
       fi
+      sdv GUI_audioVolume $(echo $NEW_VOLUME | awk '{printf "%.4f", $1 / 10000}')
+      PREV_VOLUME=$(get_volume_int)
+      PREV_SPEED=$CURRENT_SPEED
     fi
   fi
-  #a 3 second delay seems acceptable and means less cpu overhead due to polling
-  /bin/sleep 3
-
+  if (( CURRENT_SPEED == 0 )) && [[ $(lv VAPI_driverPresent) != '"true"' ]]; then
+    /bin/sleep 60
+  else
+    /bin/sleep 1.5
+  fi
 done
-
