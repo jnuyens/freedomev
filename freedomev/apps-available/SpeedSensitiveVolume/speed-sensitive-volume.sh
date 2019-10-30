@@ -11,10 +11,10 @@ VOLUME_INCREMENT=1665
 # ------------
 
 get_volume_int() {
-  lv GUI_audioVolume | awk -F\" '{ printf "%d", $2 * 10000 }'
+  /usr/local/bin/lv GUI_audioVolume | awk -F\" '{ printf "%d", $2 * 10000 }'
 }
 get_speed_int() {
-  lv VAPI_vehicleSpeed | awk -F\" '{ printf "%d", $2 }'
+  /usr/local/bin/lv VAPI_vehicleSpeed | awk -F\" '{ printf "%d", $2 }'
 }
 
 INIT_VOLUME=$(get_volume_int)
@@ -40,12 +40,12 @@ while true; do
       if (( NEW_VOLUME <= 0 )); then
         NEW_VOLUME=$VOLUME_INCREMENT
       fi
-      sdv GUI_audioVolume $(echo $NEW_VOLUME | awk '{printf "%.4f", $1 / 10000}')
+      /usr/local/bin/sdv GUI_audioVolume $(echo $NEW_VOLUME | awk '{printf "%.4f", $1 / 10000}')
       PREV_VOLUME=$(get_volume_int)
       PREV_SPEED=$CURRENT_SPEED
     fi
   fi
-  if (( CURRENT_SPEED == 0 )) && [[ $(lv VAPI_driverPresent) != '"true"' ]]; then
+  if (( CURRENT_SPEED == 0 )) && [[ $(/usr/local/bin/lv VAPI_driverPresent) != '"true"' ]]; then
     /bin/sleep 60
   else
     /bin/sleep 1.5
