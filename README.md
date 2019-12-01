@@ -4,6 +4,7 @@ Full launch presentation:
 https://www.youtube.com/embed/k7jbERL-Jd0
 
 ***Do not upgrade to 2019.40.1.1; the latest supported version is 2019.36.2.1***
+
 **Upgrading to 2019.4 or higher needs additional work to get cron working **
 
 Or look at the **FAQ** below.
